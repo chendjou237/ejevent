@@ -21,6 +21,7 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
+import { JSX, SVGProps } from "react"
 
 export function ContactUs() {
   return (
@@ -30,7 +31,7 @@ export function ContactUs() {
           <div className="space-y-2">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Get in Touch</h2>
             <p className="max-w-[700px] text-gray-500 md:text-xl/relaxed dark:text-gray-400">
-              Have a question or want to book a consultation? Fill out the form below and we'll get back to you as soon
+              Have a question or want to book a consultation? Fill out the form below and we&apos;ll get back to you as soon
               as possible.
             </p>
           </div>
@@ -104,7 +105,7 @@ export function ContactUs() {
   )
 }
 
-function LocateIcon(props) {
+function LocateIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -128,7 +129,7 @@ function LocateIcon(props) {
 }
 
 
-function MailIcon(props) {
+function MailIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -149,7 +150,7 @@ function MailIcon(props) {
 }
 
 
-function PhoneIcon(props) {
+function PhoneIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
