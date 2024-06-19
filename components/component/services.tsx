@@ -19,7 +19,7 @@ To read more about using these font, please visit the Next.js documentation:
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
 
-import Card from "./Card";
+import Card from "./card";
 
  
 

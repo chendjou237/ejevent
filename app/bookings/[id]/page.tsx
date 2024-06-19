@@ -1,10 +1,5 @@
-'use client'
 
-import { useParams } from "next/navigation"
-
-
-export default function Bookings() {
-   const params = useParams<{id:string}>()
+export default function Page({params}: {params:{id: string}}) {
 
   return (<center>{params.id}</center>)
   
