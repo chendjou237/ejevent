@@ -4,7 +4,7 @@
 * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
 */
 
-import Card from "./Card";
+import Card from "./card";
 
 /** Add fonts into your Next.js project:
 
