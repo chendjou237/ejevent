@@ -68,24 +68,24 @@ export function Footer() {
             </nav>
           </div>
           <div className="grid gap-2">
-            <h4 className="text-lg font-semibold">Follow Us</h4>
+            <h3 className="text-lg font-semibold">Follow Us</h3>
             <nav className="flex gap-4">
               <Link
-                href="#"
+                href="https://www.instagram.com/ej_events_and_co?igsh=MWZxYzYxc2o2ejBieQ%3D%3D&utm_source=qr"
                 className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
                 prefetch={false}
               >
                 <FacebookIcon className="w-6 h-6" />
               </Link>
               <Link
-                href="#"
+                href="https://www.instagram.com/ej_events_and_co?igsh=MWZxYzYxc2o2ejBieQ%3D%3D&utm_source=qr"
                 className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
                 prefetch={false}
               >
                 <TwitterIcon className="w-6 h-6" />
               </Link>
               <Link
-                href="#"
+                href="https://www.instagram.com/ej_events_and_co?igsh=MWZxYzYxc2o2ejBieQ%3D%3D&utm_source=qr"
                 className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
                 prefetch={false}
               >

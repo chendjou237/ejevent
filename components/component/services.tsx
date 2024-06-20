@@ -31,11 +31,11 @@ export function Services() {
             </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-8">
 
-      <Card   name='Birthday Decoration' image={"/placeholder.svg"} id="1" />
-      <Card   name='Wedding Decoration' image={"/placeholder.svg"} id="2" />
-      <Card   name='Baby Shower' image={"/placeholder.svg"} id="3" />
-         <Card   name='Surprise Events' image={"/placeholder.svg"} id="4" />
-      <Card   name='Catering' image={"/placeholder.svg"} id="5" />
+      <Card   name='Birthday Decoration' image={"/decoration_3.jpg"} id="1" />
+      <Card   name='Wedding Decoration' image={"/decoration_2.jpg"} id="2" />
+      <Card   name='Baby Shower' image={"/baby_shower.jpg"} id="3" />
+         <Card   name='Surprise Events' image={"/surprise_event.jpg"} id="4" />
+      <Card   name='Catering' image={"/cartering.jpg"} id="5" />
       </div>
       
     </section>

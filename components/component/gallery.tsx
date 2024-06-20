@@ -21,6 +21,34 @@ import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext
 import Image from "next/image"
 import { JSX, SVGProps } from "react"
 
+const mockData: GalleryItemProps[] = [
+  {image: '/decoration_1.jpg',
+  title: 'Rustic Wall Decor',
+  description: 'Handcrafted wooden wall art for a cozy, farmhouse-inspired look.',
+  id: 1
+  },
+  {image: '/decoration_2.jpg',
+  title: 'Elegant Table Centerpieces',
+  description: 'Custom floral arrangements to elevate your dining experience.',
+  id: 2
+  },
+  {image: '/decoration_3.jpg',
+  title: 'Modern Lighting Fixtures',
+  description: 'Illuminate your space with sleek, contemporary lighting solutions.',
+  id: 3
+  },
+  {image: '/slide.jpg',
+  title: 'Luxury Home Accents',
+  description: 'Add a touch of sophistication with our collection of premium home decor.',
+  id: 4
+  },
+  {image: '/decoration_5.jpg',
+  title: 'Artisanal Wall Hangings',
+  description: 'Handwoven tapestries and macrame pieces to add texture to your walls.',
+  id: 5
+  },
+];
+
 export function Gallery() {
   return (
     <section className="w-full py-12 md:py-24 lg:py-32">
@@ -37,54 +65,8 @@ export function Gallery() {
           <div className="relative group">
             <Carousel className="w-full max-w-4xl mx-auto">
               <CarouselContent>
-                <CarouselItem>
-                  <div className="relative overflow-hidden rounded-xl">
-                    <Image
-                      src="/placeholder.svg"
-                      width={1200}
-                      height={800}
-                      alt="Decorative Vase"
-                      className="object-cover w-full aspect-[3/2]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                    <div className="absolute bottom-0 left-0 p-4 text-white">
-                      <h3 className="text-lg font-semibold">Decorative Vase</h3>
-                      <p className="text-sm">A stunning ceramic vase to add a touch of elegance to any room.</p>
-                    </div>
-                  </div>
-                </CarouselItem>
-                <CarouselItem>
-                  <div className="relative overflow-hidden rounded-xl">
-                    <Image
-                      src="/placeholder.svg"
-                      width={1200}
-                      height={800}
-                      alt="Rustic Wall Decor"
-                      className="object-cover w-full aspect-[3/2]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                    <div className="absolute bottom-0 left-0 p-4 text-white">
-                      <h3 className="text-lg font-semibold">Rustic Wall Decor</h3>
-                      <p className="text-sm">Handcrafted wooden wall art for a cozy, farmhouse-inspired look.</p>
-                    </div>
-                  </div>
-                </CarouselItem>
-                <CarouselItem>
-                  <div className="relative overflow-hidden rounded-xl">
-                    <Image
-                      src="/placeholder.svg"
-                      width={1200}
-                      height={800}
-                      alt="Minimalist Candle Holders"
-                      className="object-cover w-full aspect-[3/2]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                    <div className="absolute bottom-0 left-0 p-4 text-white">
-                      <h3 className="text-lg font-semibold">Minimalist Candle Holders</h3>
-                      <p className="text-sm">Sleek and modern candle holders to create a cozy ambiance.</p>
-                    </div>
-                  </div>
-                </CarouselItem>
+                {...mockData.map((data)=> <GalleryItem {...data} key={data.id} />)}
+               
               </CarouselContent>
               <CarouselPrevious className="absolute top-1/2 left-4 -translate-y-1/2 z-10">
                 <ChevronLeftIcon className="w-8 h-8 text-white/70 hover:text-white transition-colors" />
@@ -137,4 +119,25 @@ function ChevronRightIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElemen
       <path d="m9 18 6-6-6-6" />
     </svg>
   )
+}
+
+    function GalleryItem({image, title, description}: GalleryItemProps) {
+      return (<CarouselItem>
+                  <div className="relative overflow-hidden rounded-xl">
+                    <Image src={image} width={1200} height={800} alt="Rustic Wall Decor" className="object-cover w-full aspect-[3/2]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                    <div className="absolute bottom-0 left-0 p-4 text-white">
+                      <h3 className="text-lg font-semibold">{title}</h3>
+                      <p className="text-sm">{description}.</p>
+                    </div>
+                  </div>
+                </CarouselItem>);
+    }
+  
+
+interface GalleryItemProps {
+  image: string,
+  title: string,
+  description: string,
+  id: number
 }

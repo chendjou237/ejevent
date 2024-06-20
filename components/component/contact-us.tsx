@@ -79,15 +79,16 @@ export function ContactUs() {
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
                   <LocateIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                  <p className="text-gray-500 dark:text-gray-400">123 Main St, Anytown USA</p>
+                  <p className="text-gray-500 dark:text-gray-400">Canada 🇨🇦 Toronto Ontario
+                  </p>
                 </div>
                 <div className="flex items-center gap-2">
                   <PhoneIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                  <p className="text-gray-500 dark:text-gray-400">(123) 456-7890</p>
+                  <p className="text-gray-500 dark:text-gray-400">+1 (647) 674-9434</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <MailIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                  <p className="text-gray-500 dark:text-gray-400">info@decorationbooking.com</p>
+                  <p className="text-gray-500 dark:text-gray-400">maivalaetitia@gmail.com</p>
                 </div>
               </div>
             </div>

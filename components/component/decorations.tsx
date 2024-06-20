@@ -30,11 +30,11 @@ export function Decorations() {
             </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-8">
 
-      <Card   name='Chaffing dishes' image={"/placeholder.svg"} id="#" />
-      <Card   name='Slide' image={"/placeholder.svg"} id="#" />
-      <Card   name='Decoration material' image={"/placeholder.svg"} id="#" />
-      <Card   name='Inflatable balloons' image={"/placeholder.svg"} id="#" />
-      <Card   name='Table centerpieces' image={"/placeholder.svg"} id="#" />
+      <Card   name='Chaffing dishes' image={"/chaffing_dishes.jpg"} id="#" />
+      <Card   name='Slide' image={"/slide.jpg"} id="#" />
+      <Card   name='Decoration material' image={"/decoration_5.jpg"} id="#" />
+      <Card   name='Inflatable balloons' image={"/inflatable_balloon.jpg"} id="#" />
+      <Card   name='Table centerpieces' image={"/table_centerpiece.jpg"} id="#" />
       
       </div>
       

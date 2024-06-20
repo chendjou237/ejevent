@@ -25,7 +25,7 @@ export function Hero() {
   return (
     <section className="relative w-full h-[80vh] min-h-[500px] bg-gray-950 overflow-hidden">
       <div className="absolute inset-0 w-full h-full">
-        <Image src="/placeholder.svg" alt="Hero Image" width={0} height={0} sizes="100vw" className="w-full h-full object-cover opacity-50" />
+        <Image src="/decoration_2.jpg" alt="Hero Image" width={0} height={0} sizes="100vw" className="w-full h-full object-cover opacity-50" />
       </div>
       <div className="relative z-10 container px-4 md:px-6 h-full flex flex-col items-center justify-center text-center space-y-6 sm:space-y-8">
         <div className="max-w-3xl space-y-4 sm:space-y-6">
