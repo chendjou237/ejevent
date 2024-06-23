@@ -26,8 +26,14 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
 import { JSX, SVGProps } from "react"
 import { BookingConfirmation } from "./booking-confirmation"
+import {useBookingDate} from '@/contexts/BookingDateContext'
+import {format, formatDate} from 'date-fns'
 
+const workingHours = [
+
+]
 export function CreateBooking() {
+  const {startTime, endTime} = useBookingDate()
   return (
     <div className="grid gap-8 p-6 sm:p-8 md:p-10 lg:p-12">
       <div className="grid gap-4">
@@ -38,14 +44,14 @@ export function CreateBooking() {
         <div className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="date">Date</Label>
-            <Popover>
+       {/*      <Popover>
               <PopoverTrigger asChild>
                 <Button variant="outline" className="w-full justify-start text-left font-normal">
                   <CalendarDaysIcon className="mr-2 h-4 w-4 -translate-x-1" />
                   <span id="date-display">Select a date</span>
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
+              <PopoverContent className="w-auto p-0" align="start"> */}
                 <Calendar
                   mode="single"
                   className="p-0 [&_td]:w-10 [&_td]:h-10 [&_th]:w-10 [&_[name=day]]:w-10 [&_[name=day]]:h-10 [&>div]:space-x-0 [&>div]:gap-6"
@@ -54,28 +60,10 @@ export function CreateBooking() {
                     document.getElementById("date-display")!.textContent = dateDisplay
                   }}
                 />
-              </PopoverContent>
-            </Popover>
+          {/*     </PopoverContent>
+            </Popover> */}
           </div>
-          <div className="grid gap-2">
-            <Label htmlFor="time">Time</Label>
-            <Select>
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select a time" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="9:00 AM">9:00 AM</SelectItem>
-                <SelectItem value="10:00 AM">10:00 AM</SelectItem>
-                <SelectItem value="11:00 AM">11:00 AM</SelectItem>
-                <SelectItem value="12:00 PM">12:00 PM</SelectItem>
-                <SelectItem value="1:00 PM">1:00 PM</SelectItem>
-                <SelectItem value="2:00 PM">2:00 PM</SelectItem>
-                <SelectItem value="3:00 PM">3:00 PM</SelectItem>
-                <SelectItem value="4:00 PM">4:00 PM</SelectItem>
-                <SelectItem value="5:00 PM">5:00 PM</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+        
         </div>
         <div className="grid gap-4">
           <Card>
@@ -85,19 +73,18 @@ export function CreateBooking() {
             <CardContent className="grid gap-4">
               <div className="flex items-center justify-between">
                 <span>Date:</span>
-                <span id="date-display">Select a date</span>
+                <span id="date-display">Scheduled date: {formatDate(startTime, 'MM/dd/yyyy')} </span>
               </div>
               <div className="flex items-center justify-between">
                 <span>Time:</span>
-                <span id="time-display">Select a time</span>
+                <span id="time-display">start at: {startTime.toLocaleTimeString()} </span>
+                <span id="time-display">end at: {endTime.toLocaleTimeString()}</span>
               </div>
             </CardContent>
-            <CardFooter>
-              
-            </CardFooter>
-            <div className="">
+            <CardFooter className="flex justify-center items-center h-full">
               < BookingConfirmation/>
-              </div>
+            </CardFooter>
+            
           </Card>
         </div>
       </div>

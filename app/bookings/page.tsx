@@ -1,6 +1,7 @@
 import React from 'react'
 
-export default function Bookings() {
+export default   function Page() {
+
   return (
     <center>Bookings</center>
   )

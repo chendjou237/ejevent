@@ -17,22 +17,85 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
-import { Button } from "@/components/ui/button"
+'use client'
+import { createBooking } from "@/app/actions"
 import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Separator } from "@/components/ui/separator"
 import { Textarea } from "@/components/ui/textarea"
+import { useBookingDate } from '@/contexts/BookingDateContext'
+import { getBookingItem } from "@/server/queries"
+import { formatDate } from "date-fns"
 import Image from "next/image"
-import { Drawer, DrawerContent, DrawerTrigger, DrawerHeader, DrawerTitle, DrawerDescription, DrawerFooter, DrawerClose } from "../ui/drawer"
+import { useParams } from 'next/navigation'
+import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "../ui/drawer"
+
+import SubmitButton from '@/components/component/SubmitButton'
+import { Button } from '@/components/ui/button'
+import { Item } from '@/utils/types'
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from 'react'
+import { SubmitHandler, useForm } from "react-hook-form"
+import { toast } from "sonner"
+type Inputs = {
+  name: string,
+  email: string,
+  contact: string,
+  message: string
+}
+
+const initialState ={
+  message: null,
+}
+
 
 export function BookingConfirmation() {
+  
+useEffect( () => {
+  const data = getBookingItem(params.id as  string)
+  setItem(data)
+ 
+}, [])
+  const {startTime, endTime} = useBookingDate();
+  const [isLoading, setLoading] = useState(false)
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>()
+  const params = useParams()
+  const router = useRouter()
+
+  
+  const [item, setItem] = useState<Item>()
+  const onSubmit: SubmitHandler<Inputs> = async (data)  => {
+    const {name , email , contact, message} = data
+    setLoading(true)
+    console.log(name, email, contact, message, item, startTime, endTime)
+    const response = await createBooking(name, email, contact, item as Item, startTime, endTime)
+    setLoading(false)
+    if(response.status ===  'error'){
+      console.log(response.message)
+      toast("Booking Failed, Please try again.")
+    }
+    if(response.status === 'success'){
+      console.log(response.message)
+      toast("Booking Successful, You will be send an email of confirmation.")
+      router.push('/')
+    }
+  }
+
+  
   return (
     <Drawer >
       <DrawerTrigger asChild>
-        <Button variant="outline">View Reservation</Button>
+        <Button variant="outline" >View Reservation</Button>
       </DrawerTrigger>
-      <DrawerContent className="sm:max-w-[600px]">
+      <DrawerContent >
+      <div className="mx-auto w-full max-w-sm">
+  
       <DrawerHeader>
       <DrawerTitle>Are you absolutely sure?</DrawerTitle>
       <DrawerDescription>This action cannot be undone.</DrawerDescription>
@@ -40,7 +103,7 @@ export function BookingConfirmation() {
         <div className="grid sm:grid-cols-2 grid-cols-1  gap-6">
           <div>
             <Image
-              src="/placeholder.svg"
+              src={item?.image ?? "/placeholder.svg"}
               alt="Decoration Item"
               width={400}
               height={400}
@@ -49,11 +112,12 @@ export function BookingConfirmation() {
           </div>
           <div className="space-y-4">
             <div>
-              <h3 className="text-2xl font-bold">Elegant Floral Arch</h3>
-              <p className="text-muted-foreground">Booked for June 15, 2024</p>
+              <h3 className="text-2xl font-bold">{item?.name}</h3>
+              <h4 className="text-xl font-bold">{item?.description}</h4>
+              <p className="text-muted-foreground">Booked for {formatDate(startTime, 'MM/dd/yyyy')}</p>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-lg font-medium">$500</span>
+              <span className="text-lg font-medium">${item?.price}</span>
               <Badge variant="outline">Booked</Badge>
             </div>
             <div className="space-y-2">
@@ -70,30 +134,32 @@ export function BookingConfirmation() {
           </div>
         </div>
         <Separator className="my-6" />
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
               <Label htmlFor="name">Name</Label>
-              <Input id="name" placeholder="Enter your name" />
+              <Input id="name" placeholder="Enter your name" defaultValue="" {...register("name")}/>
             </div>
             <div className="space-y-1">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" placeholder="Enter your email" />
+              <Input id="email" type="email" placeholder="Enter your email"  defaultValue="" {...register("email")}/>
             </div>
           </div>
           <div className="space-y-1">
-            <Label htmlFor="phone">Phone</Label>
-            <Input id="phone" type="tel" placeholder="Enter your phone number" />
+            <Label htmlFor="contact">Phone</Label>
+            <Input id="contact" type="tel" placeholder="Enter your phone number"  defaultValue="" {...register("contact")}/>
+          
           </div>
           <div className="space-y-1">
             <Label htmlFor="message">Message</Label>
-            <Textarea id="message" placeholder="Enter any additional details" />
+            <Textarea id="message" placeholder="Enter any additional details"  defaultValue="" {...register("message")}/>
           </div>
           <DrawerFooter className="flex justify-end gap-2">
             <DrawerClose >Cancel</DrawerClose>
-            <Button>Confirm Reservation</Button>
+            <SubmitButton />
           </DrawerFooter>
         </form>
+        </div>
       </DrawerContent>
     </Drawer>
   )
