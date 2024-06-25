@@ -28,7 +28,6 @@ To read more about using these font, please visit the Next.js documentation:
 import { SetStateAction, useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
-import { Pagination } from "@/components/ui/pagination"
 
 export function Bookings() {
   const [search, setSearch] = useState("")
@@ -219,7 +218,7 @@ export function Bookings() {
         </Table>
       </div>
       <div className="mt-6 flex justify-center">
-        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+      
       </div>
       <div className="mt-8">
         <h2 className="text-xl font-bold mb-4">Bookings Summary</h2>
