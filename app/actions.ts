@@ -8,6 +8,7 @@ import { randomInt } from "crypto"
 import { revalidatePath } from 'next/cache'
 import { Resend } from 'resend';
 import { formatDate } from 'date-fns'
+import { EmailTemplate } from "@/components/component/email-template"
 
 
 
@@ -31,64 +32,14 @@ export async function  createBookings  (data: Booking[])  {
        } */
     
         await db.insert(bookings).values(createBookings)
-        const resend = new Resend('re_E9LwPAtd_MjKH1mHQyB9fpYSYi2UGroLJ');
+        const resend = new Resend(process.env.RESEND_API_KEY);
 
 await resend.emails.send({
-  from: 'Acme <onboarding@resend.dev>',
-  to: `@${data[0].user_email}`,
+  from: 'Honore <chenxhenor@gmail.com>',
+  to:[ `@${data[0].user_email}`],
   subject: ' 🎉 Congrats Your Booking was Confirmed! 🎉',
   text: 'it works!',
-  html: 
-  `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Confirmation</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            border-radius: 8px 8px 0 0;
-        }
-        .content {
-            padding: 20px;
-            line-height: 1.6;
-        }
-        .footer {
-            text-align: center;
-            padding: 10px;
-            color: #888;
-            font-size: 0.8em;
-        }
-        .highlight {
-            color: #4CAF50;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-       hiiiiiiiiiiii
-    </div>
-</body>
-</html>`
+  react: EmailTemplate({firstName: data[0].user_name})  as React.ReactElement
 });
        revalidatePath('/bookings')
        return {

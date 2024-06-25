@@ -2,9 +2,11 @@
 
 ## Full app tasks
 
-* [ ] fix current deployment issues
+* [X] fix current deployment issues
 * [ ] buy custom domain
 * [ ] sync the custom domain
+* [X] fix the navbar routing
+* [ ] work on the cart content number notifier
 
 ## client side app
 
@@ -15,8 +17,8 @@
 
 ### create booking chores
 
-* [ ] create a very last time to make that resend work
-* [ ] make the create feature work without need to log in
+* [X] create a very last time to make that resend work
+* [X] make the create feature work without need to log in
 * [ ] handle toast messages efficiently
 * [ ] handle the navigations efficiently
 * [ ] do some cleaning after creations
@@ -47,9 +49,7 @@
 * [ ] handle deleting users
 * [ ] (maybe) handle banning users
 
-
-
-### Decorations 
+### Decorations
 
 * [ ] I just wanna run away zuuuuuuuuuuuuuuuuuuuuuuuuuz
 * [ ] design a better architecture for the current decorations model and use case
@@ -60,8 +60,6 @@
 * [ ] handle deleting decoration
 * [ ] handle updarting a decoration
 
-
-
-### Bookings 
+### Bookings
 
 * [ ] zuuz everything is in your hand

@@ -24,7 +24,7 @@ To read more about using these font, please visit the Next.js documentation:
 
 export function Decorations() {
   return (
-    <section className=" p-4 md:p-6">
+    <section className=" p-4 md:p-6" id="decorations">
       <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-8">
               Our Decorations
             </h2>

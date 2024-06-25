@@ -1,7 +1,8 @@
 import { Bookings } from "@/components/component/bookings";
-
-export default function page() {
+import { getBookings } from "@/server/queries";
+export default async  function page() {
+  const data = await getBookings()
   return (
-    <div><Bookings /></div>
+    <div><Bookings bookings={data!}/></div>
   )
 }

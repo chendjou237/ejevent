@@ -8,12 +8,12 @@ export default async function Page({params}: {params:{id: string}}) {
   
   return (
     <main className="p-16">
-     <Hero />
+     {/* <Hero />
   <div className=" flex min-h-screen flex-col items-center justify-between">
      <Gallery />
-    
+     */}
     <CreateBooking/>
-  </div>
+  {/* </div> */}
     </main>
   )
   

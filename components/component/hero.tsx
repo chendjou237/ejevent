@@ -38,7 +38,7 @@ export function Hero() {
           </p>
         </div>
         <Link
-          href="#"
+          href="#decorations"
           className="inline-flex h-12 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary-950 disabled:pointer-events-none disabled:opacity-50"
           prefetch={false}
         >

@@ -12,6 +12,7 @@ export default {
       user: env.POSTGRES_USER,   
       password: env.POSTGRES_PASSWORD,
       ssl: 'allow',
+      url: env.POSTGRES_URL as string,
   },
   tablesFilter: ["ejevent_*"],
 } satisfies Config;

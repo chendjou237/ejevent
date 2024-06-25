@@ -28,122 +28,21 @@ To read more about using these font, please visit the Next.js documentation:
 import { SetStateAction, useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
+import {Booking} from "@/utils/types"
+import { formatDate } from 'date-fns'
+import Image from "next/image"
+import { Button } from "../ui/button"
 
-export function Bookings() {
+interface BookingsProps {
+  bookings: Booking[]
+
+}
+export function Bookings({bookings}: BookingsProps) {
   const [search, setSearch] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
   const [bookingsPerPage] = useState(10)
-  const bookings = [
-    {
-      id: 1,
-      date: "2023-06-01",
-      startTime: "9:00 AM",
-      endTime: "5:00 PM",
-      client: "Chendjou honore",
-      service: "Interior Design",
-      status: "Completed",
-    },
-    {
-      id: 2,
-      date: "2023-05-15",
-      startTime: "10:30 AM",
-      endTime: "3:00 PM",
-      client: "Jane Smith",
-      service: "Landscaping",
-      status: "Pending",
-    },
-    {
-      id: 3,
-      date: "2023-04-20",
-      startTime: "1:00 PM",
-      endTime: "6:00 PM",
-      client: "Bob Johnson",
-      service: "Home Staging",
-      status: "Cancelled",
-    },
-    {
-      id: 4,
-      date: "2023-03-10",
-      startTime: "8:00 AM",
-      endTime: "4:30 PM",
-      client: "Sarah Lee",
-      service: "Interior Design",
-      status: "Completed",
-    },
-    {
-      id: 5,
-      date: "2023-02-28",
-      startTime: "11:00 AM",
-      endTime: "2:00 PM",
-      client: "Tom Wilson",
-      service: "Landscaping",
-      status: "Pending",
-    },
-    {
-      id: 6,
-      date: "2023-01-05",
-      startTime: "9:30 AM",
-      endTime: "6:30 PM",
-      client: "Emily Davis",
-      service: "Home Staging",
-      status: "Completed",
-    },
-    {
-      id: 7,
-      date: "2022-12-15",
-      startTime: "2:00 PM",
-      endTime: "8:00 PM",
-      client: "Michael Brown",
-      service: "Interior Design",
-      status: "Cancelled",
-    },
-    {
-      id: 8,
-      date: "2022-11-22",
-      startTime: "10:00 AM",
-      endTime: "4:00 PM",
-      client: "Jessica Wilson",
-      service: "Landscaping",
-      status: "Pending",
-    },
-    {
-      id: 9,
-      date: "2022-10-01",
-      startTime: "1:30 PM",
-      endTime: "5:30 PM",
-      client: "David Lee",
-      service: "Home Staging",
-      status: "Completed",
-    },
-    {
-      id: 10,
-      date: "2022-09-18",
-      startTime: "8:45 AM",
-      endTime: "4:15 PM",
-      client: "Olivia Thompson",
-      service: "Interior Design",
-      status: "Completed",
-    },
-    {
-      id: 11,
-      date: "2022-08-05",
-      startTime: "11:15 AM",
-      endTime: "6:45 PM",
-      client: "Christopher Nguyen",
-      service: "Landscaping",
-      status: "Cancelled",
-    },
-    {
-      id: 12,
-      date: "2022-07-25",
-      startTime: "9:00 AM",
-      endTime: "3:00 PM",
-      client: "Sophia Patel",
-      service: "Home Staging",
-      status: "Pending",
-    },
-  ]
-  const filteredBookings = bookings.filter((booking) => booking.client.toLowerCase().includes(search.toLowerCase()))
+  
+  const filteredBookings = bookings.filter((booking) => booking.item_name.toLowerCase().includes(search.toLowerCase()))
   const indexOfLastBooking = currentPage * bookingsPerPage
   const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage
   const currentBookings = filteredBookings.slice(indexOfFirstBooking, indexOfLastBooking)
@@ -173,7 +72,7 @@ export function Bookings() {
       <div className="mb-6">
         <Input
           type="text"
-          placeholder="Search by client name"
+          placeholder="Search by decoration name"
           value={search}
           onChange={handleSearch}
           className="w-full max-w-md"
@@ -183,22 +82,25 @@ export function Bookings() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Booking Date</TableHead>
+              <TableHead>image</TableHead>
+              <TableHead>Date</TableHead>
               <TableHead>Start Time</TableHead>
               <TableHead>End Time</TableHead>
               <TableHead>Client Name</TableHead>
-              <TableHead>Service</TableHead>
+              <TableHead>Decoration name</TableHead>
               <TableHead>Status</TableHead>
+              <TableHead>Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {currentBookings.map((booking) => (
               <TableRow key={booking.id}>
-                <TableCell>{booking.date}</TableCell>
-                <TableCell>{booking.startTime}</TableCell>
-                <TableCell>{booking.endTime}</TableCell>
-                <TableCell>{booking.client}</TableCell>
-                <TableCell>{booking.service}</TableCell>
+                <TableCell><Image src={booking.item_image} alt={booking.item_name} height={100} width={100}/> </TableCell>
+                <TableCell>{formatDate(booking.start_at!, 'MM/dd/yyyy')}</TableCell>
+                <TableCell>{booking.start_at!.toLocaleTimeString()}</TableCell>
+                <TableCell>{booking.end_at!.toLocaleTimeString()}</TableCell>
+                <TableCell>{booking.user_name}</TableCell>
+                <TableCell>{booking.item_name}</TableCell>
                 <TableCell>
                   <div
                     className={`px-2 py-1 rounded-full text-xs font-medium ${
@@ -207,11 +109,12 @@ export function Bookings() {
                         : booking.status === "Pending"
                         ? "bg-yellow-100 text-yellow-800"
                         : "bg-red-100 text-red-800"
-                    }`}
+                        }`}
                   >
                     {booking.status}
                   </div>
                 </TableCell>
+                        <TableCell><Button className="bg-red-500">Cancel Reservation</Button></TableCell>
               </TableRow>
             ))}
           </TableBody>

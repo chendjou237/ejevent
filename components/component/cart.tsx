@@ -38,14 +38,23 @@ import { useUser } from "@clerk/nextjs";
 import {createBookings} from '@/app/actions'
 import { useRouter } from "next/navigation"
 import { Booking, Item } from "@/utils/types"
+import type { Metadata } from "next";
 
 import {toast} from "sonner"
-
+import { SuccessDialog } from "./success-dialog"
+export const metaData:Metadata = {
+  title: "Cart",
+  description: "Cart",
+  
+}
 export function Cart() {
   const {cart, setCart} = useCartBookings()
   const [isCreatingBooking, setIsCreatingBooking] = useState(false)
   const router = useRouter()
-
+  const [isSuccess, setIsSuccess] = useState(false)
+  const handleAddR = () => { 
+    router.push('/#decorations')
+  }
     const {isLoaded, isSignedIn, user} = useUser()
      
     
@@ -81,7 +90,7 @@ export function Cart() {
         item_image: item.image,
         start_at: item.start_at,
         end_at: item.end_at,
-        status: "pending",
+        status: "Pending",
       }
       console.log("Booking:", booking)
       return booking
@@ -96,12 +105,15 @@ export function Cart() {
   }
   if(response.status === 'success'){
     toast.success('Booking Successful')
-    router.push('/bookings')
+    setCart([])
+    setIsSuccess(true)
+    //router.push('/bookings')
   }
 }
 const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
   return (
     <div className="container mx-auto py-8 md:py-12">
+      <SuccessDialog open={isSuccess} setOpen={setIsSuccess}/>
       <h1 className="text-2xl font-bold mb-6">Your Cart</h1>
       <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-8">
         <div className="space-y-6">
@@ -134,7 +146,7 @@ const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
                       size="icon"
                       variant="outline"
                       onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                    >
+                    > 
                       <PlusIcon className="w-4 h-4" />
                     </Button>
                   </div>
@@ -172,7 +184,7 @@ const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
               </div>
             </CardContent>
             <CardFooter>
-              <Button className="w-full">Proceed to Checkout</Button>
+              <Button onClick={handleAddR} className="w-full">Add resevations</Button>
             </CardFooter>
           </Card>
           <Card>

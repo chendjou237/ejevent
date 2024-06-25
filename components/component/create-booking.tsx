@@ -42,7 +42,7 @@ export function CreateBooking() {
   const router = useRouter()
   const handleAddToCart = ()=> {
     try {
-      setCartItems([...cartItems, { ...item, start_at:startTime, end_at:endTime, quantity: 0}])
+      setCartItems([...cartItems, { ...item, start_at:startTime, end_at:endTime, quantity: 1}])
       toast.success('Decoration added to cart')
       router.push('/cart')
       

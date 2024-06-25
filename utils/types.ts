@@ -33,17 +33,18 @@ image: string
 }
 
 export interface Booking {
-   id: number | undefined,
-   user_id: string | undefined,
+   id: number | undefined | null,
+   user_id: string | undefined | null,
    user_name: string,
    user_email: string,
-   user_contact: string,
+   user_contact: string | undefined | null,
    item_id: number,
    item_name: string,
    item_image: string,
-   start_at: Date,
-   end_at: Date,
+   start_at: Date | undefined | null,
+   end_at: Date | undefined | null,
    status: string
 }
+
 
 

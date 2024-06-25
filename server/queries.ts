@@ -5,8 +5,10 @@ import { Decoration, Service } from "@/utils/types"
 import { Booking, Item } from "@/utils/types"
 import { eq } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
+import { redirect } from "next/navigation"
 import { db } from "./db"
 import { bookings } from "./db/schema"
+import {auth, currentUser} from "@clerk/nextjs/server"
 
 
 export function getServices(){
@@ -192,3 +194,31 @@ export async function getBookingsSlots(item_name: string){
 }
 
 
+export async function getBookings(){
+
+   const {userId} = auth()
+   if(!userId){
+      redirect('/')
+   }
+   const user = await currentUser()
+
+   try {
+      const data = await db.select({
+         id: bookings.id,
+         user_id: bookings.user_id,
+         user_name: bookings.user_name,
+         user_email: bookings.user_email,
+         user_contact: bookings.user_contact,
+         item_id: bookings.item_id,
+         item_name: bookings.item_name,
+         item_image: bookings.item_image,
+         start_at: bookings.start_at,
+         end_at: bookings.end_at,
+         status: bookings.status
+      }).from(bookings).where(eq(bookings.user_email, user?.primaryEmailAddress?.emailAddress!))
+   return data
+   } catch (error) {
+      console.error(error)
+      return []
+   }
+}

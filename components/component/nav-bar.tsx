@@ -28,7 +28,7 @@ import {  SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 export function NavBar() {
   return (
     <header className="flex items-center justify-between h-16 px-4 md:px-6 bg-white shadow dark:bg-gray-950">
-      <Link href="#" className="flex items-center gap-2 text-lg font-semibold" prefetch={false}>
+      <Link href="/" className="flex items-center gap-2 text-lg font-semibold" prefetch={false}>
         <MountainIcon className="h-6 w-6" />
         <span>EJ event Inc</span>
       </Link>

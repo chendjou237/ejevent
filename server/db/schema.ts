@@ -39,7 +39,7 @@ export const services = createTable("services", {
 }) */
 export const bookings = createTable("bookings", {
     id: serial("id").primaryKey(),
-    user_id: varchar("user_id"),
+    user_id: varchar("user_id").default(''),
     user_name: text("user_name").notNull(),
     user_email: text("user_email").notNull(),
     user_contact: text("user_contact"),
