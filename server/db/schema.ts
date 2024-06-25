@@ -9,7 +9,8 @@ import {
   text,
   varchar,
   integer,
-  pgEnum
+  pgEnum,
+  PgVarcharBuilder
   
 } from "drizzle-orm/pg-core";
 
@@ -38,7 +39,7 @@ export const services = createTable("services", {
 }) */
 export const bookings = createTable("bookings", {
     id: serial("id").primaryKey(),
-    user_id: integer("user_id").notNull(),
+    user_id: varchar("user_id"),
     user_name: text("user_name").notNull(),
     user_email: text("user_email").notNull(),
     user_contact: text("user_contact"),

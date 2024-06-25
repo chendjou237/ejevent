@@ -8,7 +8,7 @@ export default function Card( {image, name, id}: CardProps) {
    const router = useRouter()
    const onClick = (e: { preventDefault: () => void; }) => {
        e.preventDefault()
-       router.push(`/bookings/${name}`)
+       router.push(`/decorations/${name}`)
    }
    return (<div className="bg-white rounded-lg shadow-lg overflow-hidden dark:bg-gray-950 w-52">
      <Link href="#" className="" prefetch={false}>

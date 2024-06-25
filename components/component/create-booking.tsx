@@ -18,29 +18,47 @@ To read more about using these font, please visit the Next.js documentation:
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
 'use client'
-import { Label } from "@/components/ui/label"
-import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Label } from "@/components/ui/label"
+import { useBookingDate } from '@/contexts/BookingDateContext'
+import { useCartBookings } from "@/contexts/CartBookingsContext"
+import { getBookingItem } from "@/server/queries"
+import { formatDate } from 'date-fns'
+import Image from 'next/image'
+import { useParams, useRouter } from 'next/navigation'
 import { JSX, SVGProps } from "react"
-import { BookingConfirmation } from "./booking-confirmation"
-import {useBookingDate} from '@/contexts/BookingDateContext'
-import {format, formatDate} from 'date-fns'
+import { toast } from "sonner"
 
 const workingHours = [
 
 ]
 export function CreateBooking() {
   const {startTime, endTime} = useBookingDate()
+  const params = useParams()
+  const {cart: cartItems, setCart: setCartItems} = useCartBookings() 
+  const item = getBookingItem(params.id as  string)!
+  const router = useRouter()
+  const handleAddToCart = ()=> {
+    try {
+      setCartItems([...cartItems, { ...item, start_at:startTime, end_at:endTime, quantity: 0}])
+      toast.success('Decoration added to cart')
+      router.push('/cart')
+      
+    } catch (error) {
+      console.error(error)
+      toast.error('An error occurred while adding item to cart')
+    }
+  }
+
   return (
     <div className="grid gap-8 p-6 sm:p-8 md:p-10 lg:p-12">
       <div className="grid gap-4">
         <h2 className="text-2xl font-bold tracking-tight">Book Your Decoration Appointment</h2>
         <p className="text-muted-foreground">Select a date and time that works best for you.</p>
       </div>
-      <div className="grid md:grid-cols-2 gap-8">
+      <div className="grid md:grid-cols-1 gap-8">
         <div className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="date">Date</Label>
@@ -71,18 +89,41 @@ export function CreateBooking() {
               <CardTitle>Your Booking</CardTitle>
             </CardHeader>
             <CardContent className="grid gap-4">
+              <div className="flex justify-between flex-row">
+
+              <div>
               <div className="flex items-center justify-between">
-                <span>Date:</span>
-                <span id="date-display">Scheduled date: {formatDate(startTime, 'MM/dd/yyyy')} </span>
+                <span>Scheduled date:</span>
+                <span id="date-display"> {formatDate(startTime, 'MM/dd/yyyy')} </span>
               </div>
               <div className="flex items-center justify-between">
-                <span>Time:</span>
-                <span id="time-display">start at: {startTime.toLocaleTimeString()} </span>
-                <span id="time-display">end at: {endTime.toLocaleTimeString()}</span>
+                <span>Start at:</span>
+                <span id="time-display">{startTime.toLocaleTimeString()} </span>
               </div>
+              <div className="flex items-center justify-between">
+                <span>End at:</span>
+                <span id="time-display">{endTime.toLocaleTimeString()}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span>Service:</span>
+                <span id="service-display">{item?.name}</span>
+              </div>
+              <div className="flex items-center justify-between font-bold">
+                <span>Price:</span>
+                <span id="service-display">${item?.price}</span>
+              </div>
+              </div>
+
+              <div className="">
+                <Image src={item?.image?? './placeholder.jpg'} alt={item?.name ?? 'default'} width={200} height={200} />
+              </div>
+
+              </div>
+              <Button  className="w-full" onClick={handleAddToCart}>
+                  Add to cart
+                </Button>
             </CardContent>
             <CardFooter className="flex justify-center items-center h-full">
-              < BookingConfirmation/>
             </CardFooter>
             
           </Card>

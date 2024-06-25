@@ -1,8 +1,7 @@
-import React from 'react'
+import { Bookings } from "@/components/component/bookings";
 
-export default   function Page() {
-
+export default function page() {
   return (
-    <center>Bookings</center>
+    <div><Bookings /></div>
   )
 }

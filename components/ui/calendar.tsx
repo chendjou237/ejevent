@@ -15,8 +15,13 @@ function Calendar({
   showOutsideDays = true,
   ...props
 }: CalendarProps) {
+
+  const bookingConfig = {
+    defaultCapacity:3,
+    bookingInterval: 120
+}
   
-  const {startTime, endTime, setStartTime, setEndTime} = useBookingDate()
+  const { setStartTime, setEndTime} = useBookingDate()
   const next_available_start = new Date();
     next_available_start.setHours(next_available_start.getHours() + Math.round(next_available_start.getMinutes()/60));
     next_available_start.setMinutes(0, 0, 0); 
@@ -33,7 +38,8 @@ function Calendar({
     onSelectStart={(date)=>setStartTime(date!)}
     onSelectEnd={(date)=>setEndTime(date!)}
     bookingPickerType={'timeIntervalPicker'}
-    
+    bookingConfig={bookingConfig}
+
     />
   )
 }

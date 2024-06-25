@@ -18,26 +18,35 @@ To read more about using these font, please visit the Next.js documentation:
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
 'use client'
-import { createBooking } from "@/app/actions"
+import { createBookings } from "@/app/actions"
+import SubmitButton from '@/components/component/SubmitButton'
 import { Badge } from "@/components/ui/badge"
+import { Button } from '@/components/ui/button'
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
+import {
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetDescription,
+    SheetFooter,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet"
 import { Textarea } from "@/components/ui/textarea"
 import { useBookingDate } from '@/contexts/BookingDateContext'
 import { getBookingItem } from "@/server/queries"
+import { Item } from '@/utils/types'
 import { formatDate } from "date-fns"
 import Image from "next/image"
-import { useParams } from 'next/navigation'
-import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "../ui/drawer"
-
-import SubmitButton from '@/components/component/SubmitButton'
-import { Button } from '@/components/ui/button'
-import { Item } from '@/utils/types'
-import { useRouter } from "next/navigation"
+import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from "react-hook-form"
 import { toast } from "sonner"
+
 type Inputs = {
   name: string,
   email: string,
@@ -74,7 +83,7 @@ useEffect( () => {
     const {name , email , contact, message} = data
     setLoading(true)
     console.log(name, email, contact, message, item, startTime, endTime)
-    const response = await createBooking(name, email, contact, item as Item, startTime, endTime)
+   /*  const response = await createBookings([{ name, email, contact, item: item as Item, startTime, endTime }])
     setLoading(false)
     if(response.status ===  'error'){
       console.log(response.message)
@@ -84,22 +93,22 @@ useEffect( () => {
       console.log(response.message)
       toast("Booking Successful, You will be send an email of confirmation.")
       router.push('/')
-    }
+    } */
   }
 
   
   return (
-    <Drawer >
-      <DrawerTrigger asChild>
-        <Button variant="outline" >View Reservation</Button>
-      </DrawerTrigger>
-      <DrawerContent >
-      <div className="mx-auto w-full max-w-sm">
-  
-      <DrawerHeader>
-      <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-      <DrawerDescription>This action cannot be undone.</DrawerDescription>
-    </DrawerHeader>
+    <Sheet  >
+      <SheetTrigger asChild>
+        <Button variant="outline" >Add Reservation</Button>
+      </SheetTrigger>
+      <SheetContent >
+      <ScrollArea className=" ">
+
+      <SheetHeader>
+      <SheetTitle>Are you absolutely sure?</SheetTitle>
+      <SheetDescription>This action cannot be undone.</SheetDescription>
+    </SheetHeader>
         <div className="grid sm:grid-cols-2 grid-cols-1  gap-6">
           <div>
             <Image
@@ -154,13 +163,13 @@ useEffect( () => {
             <Label htmlFor="message">Message</Label>
             <Textarea id="message" placeholder="Enter any additional details"  defaultValue="" {...register("message")}/>
           </div>
-          <DrawerFooter className="flex justify-end gap-2">
-            <DrawerClose >Cancel</DrawerClose>
+          <SheetFooter className="flex justify-end gap-2">
+            <SheetClose >Cancel</SheetClose>
             <SubmitButton />
-          </DrawerFooter>
+          </SheetFooter>
         </form>
-        </div>
-      </DrawerContent>
-    </Drawer>
+        </ScrollArea>
+      </SheetContent>
+    </Sheet>
   )
 }

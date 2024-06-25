@@ -8,6 +8,7 @@
 
 import { Inter } from 'next/font/google'
 
+
 inter({
   subsets: ['latin'],
   display: 'swap',
@@ -22,6 +23,7 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { JSX, SVGProps } from "react"
+import {  SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 
 export function NavBar() {
   return (
@@ -31,27 +33,16 @@ export function NavBar() {
         <span>EJ event Inc</span>
       </Link>
       <div className="flex items-center gap-4">
-        <Button variant="ghost" size="icon" className="rounded-full">
+        <Link href={'/cart'}   className="rounded-full">
           <ShoppingCartIcon className="h-6 w-6" />
           <span className="sr-only">Cart</span>
-        </Button>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="rounded-full">
-              <Avatar className="h-6 w-6">
-                <AvatarImage src="/placeholder-user.jpg" />
-                <AvatarFallback>JP</AvatarFallback>
-                <span className="sr-only">Toggle user menu</span>
-              </Avatar>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem>My Account</DropdownMenuItem>
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        </Link>
+        <SignedOut>
+          <SignInButton />
+        </SignedOut>
+        <SignedIn>
+        <UserButton />
+        </SignedIn>
       </div>
     </header>
   )

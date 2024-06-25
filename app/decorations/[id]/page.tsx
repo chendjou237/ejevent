@@ -5,6 +5,7 @@ import {  getBookingsSlots } from "@/server/queries";
 
 export default async function Page({params}: {params:{id: string}}) {
   const slots = await getBookingsSlots(params.id)
+  
   return (
     <main className="p-16">
      <Hero />
