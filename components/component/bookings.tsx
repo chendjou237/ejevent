@@ -40,7 +40,7 @@ export function Bookings() {
       date: "2023-06-01",
       startTime: "9:00 AM",
       endTime: "5:00 PM",
-      client: "Chend",
+      client: "Chendjou honore",
       service: "Interior Design",
       status: "Completed",
     },
