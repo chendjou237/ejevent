@@ -18,7 +18,6 @@ To read more about using these font, please visit the Next.js documentation:
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
 'use client'
-import { createBookings } from "@/app/actions"
 import SubmitButton from '@/components/component/SubmitButton'
 import { Badge } from "@/components/ui/badge"
 import { Button } from '@/components/ui/button'
@@ -39,13 +38,12 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { useBookingDate } from '@/contexts/BookingDateContext'
 import { getBookingItem } from "@/server/queries"
-import { Item } from '@/utils/types'
+import { Decorations } from '@/utils/types'
 import { formatDate } from "date-fns"
 import Image from "next/image"
 import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from "react-hook-form"
-import { toast } from "sonner"
 
 type Inputs = {
   name: string,
@@ -78,7 +76,7 @@ useEffect( () => {
   const router = useRouter()
 
   
-  const [item, setItem] = useState<Item>()
+  const [item, setItem] = useState<Decorations>()
   const onSubmit: SubmitHandler<Inputs> = async (data)  => {
     const {name , email , contact, message} = data
     setLoading(true)

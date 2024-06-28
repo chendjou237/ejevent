@@ -15,18 +15,19 @@ import {
 } from "drizzle-orm/pg-core";
 
 export const createTable = pgTableCreator((name) => `ejevent_${name}`);
-/* 
 
 export const decorations = createTable("decorations", {
    id: serial("id").primaryKey(),
    name: text("name").notNull(),
    description: varchar("description", {length: 255}).notNull(),
+   type: varchar("type", {length: 255}).notNull(),
    price: integer("price").default(0),
    image: text("image").notNull(),
    created_at: timestamp("created_at").defaultNow(),
    updated_at: timestamp("updated_at").defaultNow(),
-})
-
+   })
+   
+   /* 
 export const services = createTable("services", {
    id: serial("id").primaryKey(),
    name: text("name").notNull(),

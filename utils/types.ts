@@ -6,19 +6,15 @@ export interface Service {
    image: string
 }
 
+
+
 export interface Decoration {
-   id: string,
+   id: number,
    name: string,
    description: string,
-   price: number,
-   image: string
-}
-export interface Item {
-   id: string,
-   name: string,
-   description: string,
-   price: number,
-   image: string
+   price: number | undefined | null,
+   image: string,
+   type: string
 }
 
 export interface CartItem{
@@ -43,8 +39,12 @@ export interface Booking {
    item_image: string,
    start_at: Date | undefined | null,
    end_at: Date | undefined | null,
-   status: string
+   status: Status
 }
 
 
-
+enum Status {
+   pending = 'Pending',
+   completed = 'Completed',
+   cancelled = 'Cancelled'
+}

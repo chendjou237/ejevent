@@ -19,14 +19,14 @@
 
 * [X] create a very last time to make that resend work
 * [X] make the create feature work without need to log in
-* [ ] handle toast messages efficiently
-* [ ] handle the navigations efficiently
-* [ ] do some cleaning after creations
+* [X] handle toast messages efficiently
+* [X] handle the navigations efficiently
+* [X] do some cleaning after creations
 
 ### List of bookings
 
-* [ ] Create the query for that shit
-* [ ] think about status management
+* [X] Create the query for that shit
+* [X] think about status management
 * [ ] for now leavam
 
 ### Cancelling bookings

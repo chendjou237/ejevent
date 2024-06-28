@@ -1,6 +1,4 @@
 import { CreateBooking } from "@/components/component/create-booking";
-import { Gallery } from "@/components/component/gallery";
-import { Hero } from "@/components/component/hero";
 import {  getBookingsSlots } from "@/server/queries";
 
 export default async function Page({params}: {params:{id: string}}) {

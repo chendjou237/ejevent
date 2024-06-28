@@ -4,8 +4,9 @@ import { ContactUs } from "@/components/component/contact-us";
 import { Gallery } from "@/components/component/gallery";
 import { Hero } from "@/components/component/hero";
 import { Services } from "@/components/component/services";
-
-export default function Home() {
+import {getHomeData} from "@/server/queries";
+export default async function Page() {
+  const {services, decorations} = await getHomeData()
   return (
     
     <div className="flex min-h-screen flex-col items-center justify-between">
@@ -14,8 +15,8 @@ export default function Home() {
      <Gallery />
      <AboutUs />
      <div className="flex flex-col lg:flex-row justify-evenly lg:justify-between">
-     <Services />
-     <Decorations />
+     <Services services={services}/>
+     <Decorations decorations={decorations}/>
      </div>
      <ContactUs />
     </main>

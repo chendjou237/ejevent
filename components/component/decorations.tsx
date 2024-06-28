@@ -20,26 +20,23 @@ To read more about using these font, please visit the Next.js documentation:
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
 
-
-
-export function Decorations() {
+import {Decoration} from '@/utils/types'
+interface DecorationsProps {
+  decorations: Decoration[]
+}
+export function Decorations({decorations}: DecorationsProps) {
+  
   return (
     <section className=" p-4 md:p-6" id="decorations">
       <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-8">
               Our Decorations
             </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-8">
-
-      <Card   name='Chaffing dishes' image={"/chaffing_dishes.jpg"} id="#" />
-      <Card   name='slide' image={"/slide.jpg"} id="#" />
-      <Card   name='Decoration material' image={"/decoration_5.jpg"} id="#" />
-      <Card   name='Inflatable balloons' image={"/inflatable_balloon.jpg"} id="#" />
-      <Card   name='Table centerpieces' image={"/table_centerpiece.jpg"} id="#" />
-      ``
+      {decorations.map((decoration) => ( 
+        <Card key={decoration.id} name={decoration.name} image={decoration.image} id={`${decoration.id}`} />
+      ))}
+  
       </div>
-      
-    </section>
+  </section>
   )
 }
-
-  

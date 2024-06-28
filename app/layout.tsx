@@ -6,6 +6,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from '@clerk/nextjs'
 import {CartBookingsProvider} from '../contexts/CartBookingsContext'
+import AdminSideBar from "@/components/component/admin-sidebar";
+import IsNotDashboard from "@/components/component/is-not-dashboard";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +26,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <CartBookingsProvider>
-        <NavBar />
+          <IsNotDashboard>
+         <NavBar />
+          </IsNotDashboard>
+       
         {children}
         </CartBookingsProvider>
         <Footer />

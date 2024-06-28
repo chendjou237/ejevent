@@ -25,22 +25,22 @@ To read more about using these font, please visit the Next.js documentation:
 **/
 "use client"
 
-import { JSX, SVGProps, useState, useEffect } from "react"
-import { Separator } from "@/components/ui/separator"
+import { createBookings } from '@/app/actions'
 import { Button } from "@/components/ui/button"
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import Image from "next/image"
+import { Label } from "@/components/ui/label"
+import { Separator } from "@/components/ui/separator"
 import { useCartBookings } from "@/contexts/CartBookingsContext"
-import {format} from 'date-fns'
-import { useUser } from "@clerk/nextjs";
-import {createBookings} from '@/app/actions'
+import { Booking } from "@/utils/types"
+import { useUser } from "@clerk/nextjs"
+import { format } from 'date-fns'
+import type { Metadata } from "next"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { Booking, Item } from "@/utils/types"
-import type { Metadata } from "next";
+import { JSX, SVGProps, useState } from "react"
 
-import {toast} from "sonner"
+import { toast } from "sonner"
 import { SuccessDialog } from "./success-dialog"
 export const metaData:Metadata = {
   title: "Cart",

@@ -19,13 +19,15 @@ To read more about using these font, please visit the Next.js documentation:
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
 
-import { getServices } from "@/server/queries";
 import Card from "./card";
+import { Decoration} from "@/utils/types"
 
- 
+interface ServicesProps {
+  services: Decoration[]
+}
 
-export function Services() {
-  const services = getServices()
+
+export function Services({services}: ServicesProps) {
   return (
     <section className=" p-4 md:p-6">
       <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-8">
@@ -33,7 +35,7 @@ export function Services() {
             </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-8">
     {services.map((service) => (
-      <Card key={service.id} name={service.name} image={service.image} id={service.id} />
+      <Card key={service.id} name={service.name} image={service.image} id={`${service.id}`} />
     ))}
       </div>
     </section>
