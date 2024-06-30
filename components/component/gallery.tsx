@@ -22,27 +22,27 @@ import Image from "next/image"
 import { JSX, SVGProps } from "react"
 
 const mockData: GalleryItemProps[] = [
-  {image: '/decoration_1.jpg',
+  {image: 'https://firebasestorage.googleapis.com/v0/b/ejevent-ff5c6.appspot.com/o/decorations%2Fdecoration_6.jpg?alt=media&token=f484d62c-538e-40ba-8cf1-5a7c3422c157',
   title: 'Rustic Wall Decor',
   description: 'Handcrafted wooden wall art for a cozy, farmhouse-inspired look.',
   id: 1
   },
-  {image: '/decoration_2.jpg',
+  {image: 'https://firebasestorage.googleapis.com/v0/b/ejevent-ff5c6.appspot.com/o/services%2Fdecoration_2.jpg?alt=media&token=24e9d836-1d15-4928-800b-46bc3f5d28b8',
   title: 'Elegant Table Centerpieces',
   description: 'Custom floral arrangements to elevate your dining experience.',
   id: 2
   },
-  {image: '/decoration_3.jpg',
+  {image: 'https://firebasestorage.googleapis.com/v0/b/ejevent-ff5c6.appspot.com/o/services%2Fdecoration_3.jpg?alt=media&token=1bb63217-d997-4a13-bcf6-79aafc2e7ac8',
   title: 'Modern Lighting Fixtures',
   description: 'Illuminate your space with sleek, contemporary lighting solutions.',
   id: 3
   },
-  {image: '/slide.jpg',
+  {image: 'https://firebasestorage.googleapis.com/v0/b/ejevent-ff5c6.appspot.com/o/decorations%2Fslide.jpg?alt=media&token=bf7195d4-5d17-48d6-8d93-2f09e4ece538',
   title: 'Luxury Home Accents',
   description: 'Add a touch of sophistication with our collection of premium home decor.',
   id: 4
   },
-  {image: '/decoration_5.jpg',
+  {image: 'https://firebasestorage.googleapis.com/v0/b/ejevent-ff5c6.appspot.com/o/decorations%2Fdecoration_5.jpg?alt=media&token=0244ab16-6e66-47d1-94fa-4c74a9fe294b',
   title: 'Artisanal Wall Hangings',
   description: 'Handwoven tapestries and macrame pieces to add texture to your walls.',
   id: 5
