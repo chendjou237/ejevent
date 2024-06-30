@@ -26,7 +26,7 @@ export async function getBookingItem(id: string){
 
 export async function getDecorations(){
 try {
-      const data: Decoration[] = await db.select().from(decorations);
+      const data = await db.select().from(decorations);
       return data
 } catch (error) {
    console.error(error)
@@ -39,9 +39,9 @@ export async function getService(name: string){
    return services.find(service => service.name === name)
 }
 
-export async function getDecoration(name: string){
+export async function getDecorationBySlug(slug: string){
    const decorations = await  getDecorations()
-   return decorations.find(decoration => decoration.name === name)
+   return decorations.find(decoration => decoration.slug === slug)
 }
 
 
@@ -91,4 +91,9 @@ export async function getHomeData(){
    const services = await getServices()
    const decorations = await getProducts()
    return {services, decorations}
+}
+
+export async function getAllDecorationsSlug(){
+   const data = await getDecorations()
+   return data.map((decoration) => ({params: {slug: decoration.name}}))
 }

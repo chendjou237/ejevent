@@ -21,7 +21,7 @@ export interface CartItem{
    name: string,
    description:string,
    price: number,
-   id: string, 
+   id: number, 
    quantity: number,
    start_at: Date,
    end_at: Date,
@@ -39,7 +39,7 @@ export interface Booking {
    item_image: string,
    start_at: Date | undefined | null,
    end_at: Date | undefined | null,
-   status: Status
+   status: string
 }
 
 

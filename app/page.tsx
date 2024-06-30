@@ -5,8 +5,8 @@ import { Gallery } from "@/components/component/gallery";
 import { Hero } from "@/components/component/hero";
 import { Services } from "@/components/component/services";
 import {getHomeData} from "@/server/queries";
-export default async function Page() {
-  const {services, decorations} = await getHomeData()
+import {Suspense} from "react"
+export default  function Page() {
   return (
     
     <div className="flex min-h-screen flex-col items-center justify-between">
@@ -14,12 +14,21 @@ export default async function Page() {
     <main className=" p-16">
      <Gallery />
      <AboutUs />
-     <div className="flex flex-col lg:flex-row justify-evenly lg:justify-between">
-     <Services services={services}/>
-     <Decorations decorations={decorations}/>
-     </div>
+     <Suspense fallback={<div>Loading...</div>}>
+     <ItemsSection />
+     </Suspense>
      <ContactUs />
     </main>
     </div>
   );
+}
+
+async function ItemsSection() {
+  const {services, decorations} = await getHomeData()
+  return (
+    <div className="flex flex-col lg:flex-row justify-evenly lg:justify-between">
+     <Services services={services}/>
+     <Decorations decorations={decorations}/>
+    </div>
+  )
 }

@@ -65,10 +65,10 @@ export function Cart() {
       })
     
 
-  const handleQuantityChange = (id: string, quantity: number) => {
+  const handleQuantityChange = (id: number, quantity: number) => {
     setCart(cart.map((item) => (item.id === id ? { ...item, quantity } : item)))
   }
-  const handleRemoveItem = (id: string) => {
+  const handleRemoveItem = (id: number) => {
     setCart(cart.filter((item) => item.id !== id))
   }
   const handlePersonalInfoChange = (field: string, value: string) => {

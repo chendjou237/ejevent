@@ -25,14 +25,23 @@ To read more about using these font, please visit the Next.js documentation:
 **/
 "use client"
 
-import { useState, useMemo } from "react"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem } from "@/components/ui/dropdown-menu"
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { Pagination } from "@/components/ui/pagination"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { JSX, SetStateAction, SVGProps, useMemo, useState } from "react"
 
+
+interface User  {
+  id: number,
+  name: string,
+  email: string,
+  phone: string,
+  bookings: number,
+  profilePicture: string,
+}
 export function Users() {
   const [search, setSearch] = useState("")
   const [sort, setSort] = useState({ key: "name", order: "asc" })
@@ -120,25 +129,25 @@ export function Users() {
         bookings: 3,
         profilePicture: "/placeholder-user.jpg",
       },
-    ]
+    ] 
       .filter((user) => {
         const searchValue = search.toLowerCase()
         return user.name.toLowerCase().includes(searchValue) || user.email.toLowerCase().includes(searchValue)
       })
-      .sort((a, b) => {
+   /*    .sort((a, b) => {
         if (sort.order === "asc") {
-          return a[sort.key] > b[sort.key] ? 1 : -1
+          return a [sort.key] > b[sort.key] ? 1 : -1
         } else {
           return a[sort.key] < b[sort.key] ? 1 : -1
         }
-      })
+      }) */
       .slice((page - 1) * pageSize, page * pageSize)
   }, [search, sort, page, pageSize])
-  const handleSearch = (e) => {
+  const handleSearch = (e: { target: { value: SetStateAction<string> } }) => {
     setSearch(e.target.value)
     setPage(1)
   }
-  const handleSort = (key) => {
+  const handleSort = (key: string) => {
     if (sort.key === key) {
       setSort({ key, order: sort.order === "asc" ? "desc" : "asc" })
     } else {
@@ -146,7 +155,7 @@ export function Users() {
     }
     setPage(1)
   }
-  const handlePageChange = (pageNumber) => {
+  const handlePageChange = (pageNumber: SetStateAction<number>) => {
     setPage(pageNumber)
   }
   const handleExport = () => {
@@ -240,17 +249,17 @@ export function Users() {
         </Table>
       </div>
       <div className="flex justify-end">
-        <Pagination
+     {/*    <Pagination
           currentPage={page}
           totalPages={Math.ceil(users.length / pageSize)}
           onPageChange={handlePageChange}
-        />
+        /> */}
       </div>
     </div>
   )
 }
 
-function BanIcon(props) {
+function BanIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -271,7 +280,7 @@ function BanIcon(props) {
 }
 
 
-function FilePenIcon(props) {
+function FilePenIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -293,7 +302,7 @@ function FilePenIcon(props) {
 }
 
 
-function ListOrderedIcon(props) {
+function ListOrderedIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}

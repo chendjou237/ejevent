@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
+import { JSX, SVGProps } from "react"
 
 export function Products() {
   return (
@@ -141,7 +142,7 @@ export function Products() {
   )
 }
 
-function FilePenIcon(props) {
+function FilePenIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -163,7 +164,7 @@ function FilePenIcon(props) {
 }
 
 
-function TrashIcon(props) {
+function TrashIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}

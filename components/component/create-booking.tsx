@@ -34,15 +34,15 @@ import { toast } from "sonner"
 const workingHours = [
 
 ]
-export function CreateBooking() {
+export async function CreateBooking() {
   const {startTime, endTime} = useBookingDate()
   const params = useParams()
   const {cart: cartItems, setCart: setCartItems} = useCartBookings() 
-  const item = getBookingItem(params.id as  string)!
+  const item = (await getBookingItem(params.id as  string))!
   const router = useRouter()
   const handleAddToCart = ()=> {
     try {
-      setCartItems([...cartItems, { ...item, start_at:startTime, end_at:endTime, quantity: 1}])
+      setCartItems([...cartItems, { ...item, start_at:startTime, end_at:endTime, quantity: 1, price: item.price!}])
       toast.success('Decoration added to cart')
       router.push('/cart')
       

@@ -18,13 +18,14 @@ export const createTable = pgTableCreator((name) => `ejevent_${name}`);
 
 export const decorations = createTable("decorations", {
    id: serial("id").primaryKey(),
-   name: text("name").notNull(),
+   name: text("name").notNull().unique(),
    description: varchar("description", {length: 255}).notNull(),
    type: varchar("type", {length: 255}).notNull(),
    price: integer("price").default(0),
    image: text("image").notNull(),
    created_at: timestamp("created_at").defaultNow(),
    updated_at: timestamp("updated_at").defaultNow(),
+   slug: varchar("slug", {length: 255}).notNull(),
    })
    
    /* 

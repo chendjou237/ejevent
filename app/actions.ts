@@ -15,7 +15,7 @@ import { EmailTemplate } from "@/components/component/email-template"
 export async function  createBookings  (data: Booking[])  {
    try {
      const createBookings =  data.map(datum => {
-         return {...datum, id: randomInt(1000), status: 'pending'}
+         return {...datum, id: randomInt(1000), status: 'pending', slug: datum.item_name.replace(/\s+/g, '-').toLowerCase() }
       })
       /*  const booking: Booking = {
           id: randomInt(1000),
