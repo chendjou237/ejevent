@@ -31,10 +31,10 @@ export default function Card( {images, name, id, slug, description}: CardProps) 
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
   >
-  <CarouselContent className="ml-2 md:-ml-4">
+  <CarouselContent className="">
     {images.map((image, index) => (
       <CarouselItem key={index} className="pl-2 md:pl-4">
-        <Image src={image} alt={name} width={600} height={400} className="w-full h-48 object-cover"/>
+        <Image src={image} alt={name} width={700} height={400} className=" h-48 object-cover"/>
       </CarouselItem>
     ))}
     
