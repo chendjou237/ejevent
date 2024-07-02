@@ -17,15 +17,22 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
+'use client'
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
 import { getGalleryItems } from "@/server/queries"
 import Image from "next/image"
 import { JSX, SVGProps } from "react"
+import Autoplay from "embla-carousel-autoplay";
+import { useRef } from "react";
 
-
-
+interface Props {
+  items : 
+}
 export async function Gallery() {
   const galleryData = await getGalleryItems()
+  const plugin = useRef(
+    Autoplay({ delay: 2000, stopOnInteraction: true })
+  )
   return (
     <section className="w-full py-12 md:py-24 lg:py-32">
       <div className="container px-4 md:px-6">
@@ -39,7 +46,7 @@ export async function Gallery() {
             </p>
           </div>
           <div className="relative group">
-            <Carousel className="w-full max-w-4xl mx-auto">
+            <Carousel className="w-full max-w-4xl mx-auto"plugins={[plugin.current]}>
               <CarouselContent>
                 {...galleryData.map((data)=> <GalleryItem {...data} key={data.id} />)}
                

@@ -5,7 +5,7 @@ import { eq } from 'drizzle-orm'
 import { redirect } from "next/navigation"
 import { db } from "./db"
 import { bookings, decorations } from "./db/schema"
-
+import {shuffleList} from "@/utils/helpers"
 
 
 export async function getServices (){
@@ -89,7 +89,8 @@ export async function getBookings(){
 export async function getHomeData(){
    const services = await getServices()
    const decorations = await getProducts()
-   return {services, decorations}
+   const gallery = await getGalleryItems()
+   return {services, decorations, gallery}
 }
 
 export async function getAllDecorationsSlug(){
@@ -106,11 +107,12 @@ export async function getGalleryItems(){
          title: decoration.name,
          description: decoration.description,
          image: image,
-         id: description.id
+         id: decoration.id
       })
     })
    })
-   return gallery
+ return shuffleList( gallery)
+
 }
 
 interface GalleryItem{
