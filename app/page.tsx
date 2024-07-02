@@ -26,7 +26,7 @@ export default  function Page() {
 async function ItemsSection() {
   const {services, decorations} = await getHomeData()
   return (
-    <div className="flex flex-col lg:flex-row justify-evenly lg:justify-between">
+    <div className="flex flex-col justify-evenly lg:justify-between">
      <Services services={services}/>
      <Decorations decorations={decorations}/>
     </div>

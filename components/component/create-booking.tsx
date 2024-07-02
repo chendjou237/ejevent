@@ -24,21 +24,33 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Label } from "@/components/ui/label"
 import { useBookingDate } from '@/contexts/BookingDateContext'
 import { useCartBookings } from "@/contexts/CartBookingsContext"
-import { getBookingItem } from "@/server/queries"
+import { getDecorationBySlug } from "@/server/queries"
+import { Decoration } from "@/utils/types"
 import { formatDate } from 'date-fns'
 import Image from 'next/image'
 import { useParams, useRouter } from 'next/navigation'
 import { JSX, SVGProps } from "react"
 import { toast } from "sonner"
 
-const workingHours = [
-
-]
-export async function CreateBooking() {
+interface CreateBookingProps {
+  item: {
+    id: number;
+    name: string;
+    description: string;
+    type: string;
+    price: number | null;
+    image: string;
+    created_at: Date | null;
+    updated_at: Date | null;
+    slug: string;
+    status: string | null;
+} 
+}
+export async function CreateBooking({item}: CreateBookingProps) {
   const {startTime, endTime} = useBookingDate()
   const params = useParams()
   const {cart: cartItems, setCart: setCartItems} = useCartBookings() 
-  const item = (await getBookingItem(params.id as  string))!
+  
   const router = useRouter()
   const handleAddToCart = ()=> {
     try {
@@ -91,7 +103,7 @@ export async function CreateBooking() {
             <CardContent className="grid gap-4">
               <div className="flex justify-between flex-row">
 
-              <div>
+              
               <div className="flex items-center justify-between">
                 <span>Scheduled date:</span>
                 <span id="date-display"> {formatDate(startTime, 'MM/dd/yyyy')} </span>
@@ -108,10 +120,9 @@ export async function CreateBooking() {
                 <span>Service:</span>
                 <span id="service-display">{item?.name}</span>
               </div>
-              <div className="flex items-center justify-between font-bold">
+              <div className="flex items-center justify-between font-bold"> 
                 <span>Price:</span>
                 <span id="service-display">${item?.price}</span>
-              </div>
               </div>
 
               <div className="">

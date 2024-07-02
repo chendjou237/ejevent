@@ -9,10 +9,10 @@ export default {
   dbCredentials: {
     host: env.POSTGRES_HOST as string,
     database: env.POSTGRES_DATABASE as string ,
-      user: env.POSTGRES_USER,   
+      user: env.POSTGRES_USER,
       password: env.POSTGRES_PASSWORD,
       ssl: 'allow',
-      url: env.POSTGRES_URL as string,
+      url: env.POSTGRES_URL as string
   },
   tablesFilter: ["ejevent_*"],
 } satisfies Config;

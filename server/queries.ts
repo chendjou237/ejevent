@@ -5,7 +5,6 @@ import { eq } from 'drizzle-orm'
 import { redirect } from "next/navigation"
 import { db } from "./db"
 import { bookings, decorations } from "./db/schema"
-import { Decoration } from "@/utils/types"
 
 
 
@@ -18,10 +17,11 @@ export async function getProducts (){
    return data.filter((decoration) => decoration.type === 'product')
 }
 
-export async function getBookingItem(id: string){
+export async function getBookingItem(slug: string){
   
    const items = await getDecorations()
-   return items.find(item => item.name === id)
+   const result = items.find(item => item.slug === slug)
+   return result
 }
 
 export async function getDecorations(){
@@ -31,7 +31,7 @@ try {
 } catch (error) {
    console.error(error)
    throw new Error('Error fetching decorations')
-}  
+}
 }
 
 export async function getService(name: string){
@@ -53,7 +53,6 @@ export async function getBookingsSlots(item_name: string){
       id: bookings.id
    }).from(bookings).where(eq(bookings.item_name, item_name))
    console.log(data);
-   
    return data
 }
 
@@ -96,4 +95,27 @@ export async function getHomeData(){
 export async function getAllDecorationsSlug(){
    const data = await getDecorations()
    return data.map((decoration) => ({params: {slug: decoration.name}}))
+}
+
+export async function getGalleryItems(){
+   const data = await getDecorations()
+   var gallery: GalleryItem[] = []
+   data.forEach((decoration) => {
+    decoration.images!.map(image => {
+      gallery.push({
+         title: decoration.name,
+         description: decoration.description,
+         image: image,
+         id: description.id
+      })
+    })
+   })
+   return gallery
+}
+
+interface GalleryItem{
+   title: string, 
+   description: string,
+   image: string,
+   id: number,
 }

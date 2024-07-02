@@ -28,12 +28,10 @@ export function Decorations({decorations}: DecorationsProps) {
   
   return (
     <section className=" p-4 md:p-6" id="decorations">
-      <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-8">
-              Our Decorations
-            </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-8">
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 sm:gap-x-32 gap-y-8">
       {decorations.map((decoration) => ( 
-        <Card key={decoration.id} name={decoration.name} image={decoration.image} id={`${decoration.id}`} />
+        <Card key={decoration.id} name={decoration.name} description={decoration.description} images={decoration.images} slug={decoration.slug} id={`${decoration.id}`} />
       ))}
   
       </div>

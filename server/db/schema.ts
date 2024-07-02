@@ -1,17 +1,12 @@
 
-import { desc, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import {
-  index,
-  pgTableCreator,
-  serial,
-  timestamp,
-  time,
-  text,
-  varchar,
-  integer,
-  pgEnum,
-  PgVarcharBuilder
-  
+   integer,
+   pgTableCreator,
+   serial,
+   text,
+   timestamp,
+   varchar
 } from "drizzle-orm/pg-core";
 
 export const createTable = pgTableCreator((name) => `ejevent_${name}`);
@@ -26,19 +21,13 @@ export const decorations = createTable("decorations", {
    created_at: timestamp("created_at").defaultNow(),
    updated_at: timestamp("updated_at").defaultNow(),
    slug: varchar("slug", {length: 255}).notNull(),
+   status: varchar("status", {length: 255}).default('available'),
+   images: varchar('images', {length: 255})
+   .array()
+   .default(sql`'{}'::text[]`),
    })
    
-   /* 
-export const services = createTable("services", {
-   id: serial("id").primaryKey(),
-   name: text("name").notNull(),
-   description: varchar("description", {length: 255}).notNull(),
-   price: integer("price").default(0),
-   image: text("image").notNull(),
-   created_at: timestamp("created_at").defaultNow(),
-   updated_at: timestamp("updated_at").defaultNow(),
 
-}) */
 export const bookings = createTable("bookings", {
     id: serial("id").primaryKey(),
     user_id: varchar("user_id").default(''),

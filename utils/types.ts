@@ -14,7 +14,10 @@ export interface Decoration {
    description: string,
    price: number | undefined | null,
    image: string,
-   type: string
+   type: string,
+   status: string  | undefined | null,
+   slug: string,
+   images: string[]
 }
 
 export interface CartItem{
