@@ -34,7 +34,7 @@ export  function Gallery({items}: Props) {
     Autoplay({ delay: 2000, stopOnInteraction: true })
   )
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32">
+    <section className="w-full py-12  md:py-24 lg:py-32">
       <div className="container px-4 md:px-6">
         <div className="grid gap-8">
           <div className="grid gap-4">
@@ -45,18 +45,14 @@ export  function Gallery({items}: Props) {
               Find the perfect pieces to elevate your living space.
             </p>
           </div>
-          <div className="relative group">
-            <Carousel className="w-full max-w-4xl mx-auto"plugins={[plugin.current]}>
-              <CarouselContent>
+          <div className="">
+            <Carousel className="w-full max-w-xs" plugins={[plugin.current]}>
+              <CarouselContent className="flex aspect-square items-center justify-center p-6">
                 {...galleryData.map((data)=> <GalleryItem {...data} key={data.id} />)}
                
               </CarouselContent>
-              <CarouselPrevious className="absolute top-1/2 left-4 -translate-y-1/2 z-10">
-                <ChevronLeftIcon className="w-8 h-8 text-white/70 hover:text-white transition-colors" />
-              </CarouselPrevious>
-              <CarouselNext className="absolute top-1/2 right-4 -translate-y-1/2 z-10">
-                <ChevronRightIcon className="w-8 h-8 text-white/70 hover:text-white transition-colors" />
-              </CarouselNext>
+              <CarouselPrevious />
+      <CarouselNext />
             </Carousel>
           </div>
         </div>
@@ -106,12 +102,12 @@ function ChevronRightIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElemen
 
     function GalleryItem({image, title, description}: GalleryItemProps) {
       return (<CarouselItem>
-                  <div className="relative overflow-hidden rounded-xl">
-                    <Image src={image} width={1200} height={800} alt="Rustic Wall Decor" className="object-cover w-full aspect-[3/2]" />
+                  <div className="relative overflow-hidden h-96 rounded-xl">
+                    <Image src={image}   layout='fill' objectFit='cover' alt="Rustic Wall Decor" className="" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                     <div className="absolute bottom-0 left-0 p-4 text-white">
                       <h3 className="text-lg font-semibold">{title}</h3>
-                      <p className="text-sm">{description}.</p>
+                      <p className="text-sm line-clamp-3  ">{description}.</p>
                     </div>
                   </div>
                 </CarouselItem>);
