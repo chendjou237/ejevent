@@ -12,7 +12,7 @@ export default  function Page() {
     <div className="flex min-h-screen flex-col items-center justify-between">
      <Hero />
     <main className=" p-16">
-     <Gallery />
+
      <AboutUs />
      <Suspense fallback={<div>Loading...</div>}>
      <ItemsSection />
@@ -24,11 +24,14 @@ export default  function Page() {
 }
 
 async function ItemsSection() {
-  const {services, decorations} = await getHomeData()
+  const {services, decorations, gallery} = await getHomeData()
   return (
+<div className="">
+           <Gallery items={gallery}/>
     <div className="flex flex-col justify-evenly lg:justify-between">
      <Decorations decorations={decorations!}/>
      <Services services={services}/>
     </div>
+</div>
   )
 }

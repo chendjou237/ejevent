@@ -104,7 +104,7 @@ export async function CreateBooking({item}: CreateBookingProps) {
             <CardContent className="grid gap-4">
               <div className="flex justify-between flex-row">
 
-              
+              <div className="">
               <div className="flex items-center justify-between">
                 <span>Scheduled date:</span>
                 <span id="date-display"> {formatDate(startTime, 'MM/dd/yyyy')} </span>
@@ -124,6 +124,7 @@ export async function CreateBooking({item}: CreateBookingProps) {
               <div className="flex items-center justify-between font-bold"> 
                 <span>Price:</span>
                 <span id="service-display">${item?.price}</span>
+              </div>
               </div>
 
               <div className="">

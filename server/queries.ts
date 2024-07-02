@@ -6,6 +6,7 @@ import { redirect } from "next/navigation"
 import { db } from "./db"
 import { bookings, decorations } from "./db/schema"
 import {shuffleList} from "@/utils/helpers"
+import { GalleryItemInterface } from "@/utils/types"
 
 
 export async function getServices (){
@@ -100,7 +101,7 @@ export async function getAllDecorationsSlug(){
 
 export async function getGalleryItems(){
    const data = await getDecorations()
-   var gallery: GalleryItem[] = []
+   var gallery: GalleryItemInterface[] = []
    data.forEach((decoration) => {
     decoration.images!.map(image => {
       gallery.push({
@@ -115,9 +116,3 @@ export async function getGalleryItems(){
 
 }
 
-interface GalleryItem{
-   title: string, 
-   description: string,
-   image: string,
-   id: number,
-}

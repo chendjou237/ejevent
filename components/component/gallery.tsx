@@ -24,12 +24,12 @@ import Image from "next/image"
 import { JSX, SVGProps } from "react"
 import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
-
+import { GalleryItemInterface } from "@/utils/types"
 interface Props {
-  items : 
+  items :  GalleryItemInterface[]
 }
-export async function Gallery() {
-  const galleryData = await getGalleryItems()
+export  function Gallery({items}: Props) {
+  const galleryData = items
   const plugin = useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   )

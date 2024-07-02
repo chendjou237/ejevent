@@ -30,11 +30,11 @@ export default function RootLayout({
   return (
     <ClerkProvider>
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.className+ " min-h-screen bg-slate-100"}>
         <CartBookingsProvider>
-          <IsNotDashboard>
+          {/* <IsNotDashboard>
+          </IsNotDashboard> */}
          <NavBar />
-          </IsNotDashboard>
        
         {children}
         </CartBookingsProvider>

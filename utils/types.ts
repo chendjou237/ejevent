@@ -51,3 +51,10 @@ enum Status {
    completed = 'Completed',
    cancelled = 'Cancelled'
 }
+
+export interface GalleryItemInterface{
+   title: string, 
+   description: string,
+   image: string,
+   id: number,
+}

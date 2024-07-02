@@ -28,7 +28,15 @@ export function Decorations({decorations}: DecorationsProps) {
   
   return (
     <section className=" p-4 md:p-6" id="decorations">
-      
+            <div className="flex flex-col items-center justify-center space-y-4 text-center mb-16">
+      <div className="space-y-2">
+        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Decorate Your Space</h2>
+        <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+          Browse our curated collection of decorative pieces to transform your home.
+        </p>
+      </div>
+    </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 sm:gap-x-32 gap-y-8">
       {decorations.map((decoration) => ( 
         <Card key={decoration.id} name={decoration.name} description={decoration.description} images={decoration.images!} slug={decoration.slug} id={`${decoration.id}`} />
