@@ -57,14 +57,15 @@ import { getBookingsSlots, getDecorationBySlug, getDecorations } from "@/server/
 
 export default async function Page({params}: {params:{slug: string}}) {
   // const slots = await getBookingsSlots(params.slug)
-  const item = await getDecorationBySlug(params.slug as  string)!
+  const item = await getDecorationBySlug(params.slug as  string)
   return (
     <main className="p-16">
      {/* <Hero />
   <div className=" flex min-h-screen flex-col items-center justify-between">
      <Gallery />
      */}
-    <CreateBooking item={item}/>
+     
+    <CreateBooking item={item!}/>
   {/* </div> */}
     </main>
   )

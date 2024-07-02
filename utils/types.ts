@@ -17,7 +17,7 @@ export interface Decoration {
    type: string,
    status: string  | undefined | null,
    slug: string,
-   images: string[]
+   images: string[] | null
 }
 
 export interface CartItem{

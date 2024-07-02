@@ -44,6 +44,7 @@ interface CreateBookingProps {
     updated_at: Date | null;
     slug: string;
     status: string | null;
+    images: string[] | null;
 } 
 }
 export async function CreateBooking({item}: CreateBookingProps) {
