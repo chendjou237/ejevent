@@ -11,7 +11,7 @@ export default  function Page() {
     
     <div className="flex min-h-screen flex-col items-center justify-between">
      <Hero />
-    <main className=" p-16">
+    <main className="">
 
      <AboutUs />
      <Suspense fallback={<div>Loading...</div>}>

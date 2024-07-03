@@ -34,15 +34,15 @@ export  function Gallery({items}: Props) {
     Autoplay({ delay: 2000, stopOnInteraction: true })
   )
   return (
-    <section className="w-full py-12  md:py-24 lg:py-32">
+    <section className="w-full py-12  md:py-24 lg:py-32 bg-[#fefae0]">
       <div className="container px-4 md:px-6">
         <div className="grid gap-8">
           <div className="grid gap-4">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-              Explore Our Home Decor Collection
+              Explore Our Decor Collection
             </h2>
             <p className="text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-              Find the perfect pieces to elevate your living space.
+            Transform your special occasions into unforgettable experiences with our exquisite decorations and event planning services. From stunning centerpieces to breathtaking backdrops, we'll bring your vision to life with style and elegance. Let us help you create magical moments that will leave a lasting impression on your guests. Explore our collection and let's make your next event truly extraordinary
             </p>
           </div>
           <div className="">
@@ -51,8 +51,7 @@ export  function Gallery({items}: Props) {
                 {...galleryData.map((data)=> <GalleryItem {...data} key={data.id} />)}
                
               </CarouselContent>
-              <CarouselPrevious />
-      <CarouselNext />
+              
             </Carousel>
           </div>
         </div>

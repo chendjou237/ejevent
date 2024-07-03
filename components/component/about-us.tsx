@@ -25,7 +25,7 @@ To read more about using these font, please visit the Next.js documentation:
 **/
 export function AboutUs() {
   return (
-    <div className="w-full  dark:bg-gray-800 py-12 md:py-24 lg:py-32">
+    <div className="w-full  dark:bg-gray-800  py-12 md:py-24 lg:py-32">
       <div className="container px-4 md:px-6">
         <div className="grid gap-12 lg:grid-cols-2">
           <div className="space-y-6">
@@ -40,10 +40,8 @@ export function AboutUs() {
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Our Values</h2>
               <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                At the heart of our company are a set of core values that guide our actions and decision-making. We
-                believe in delivering exceptional quality, fostering creativity, and providing unparalleled customer
-                service. Our team is driven by a passion for transforming spaces and a commitment to making every event
-                a memorable one.
+              EJ Event, where we believe that every celebration should be a masterpiece of beauty, elegance, and personalization. Our passion for design, attention to detail, and dedication to creating unforgettable experiences set us apart from the rest. At EJ Event, we don't just plan events – we curate enchanting moments that reflect your unique style and vision
+              . From exquisite decorations to seamless coordination, we infuse every detail with creativity and care to transform your event into a magical and unforgettable experience. Trust EJ Event to bring your dreams to life and make your special occasion truly extraordinary.
               </p>
             </div>
           </div>
@@ -51,8 +49,8 @@ export function AboutUs() {
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Meet Our Designers</h2>
               <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                At EJevent Decoration, we have assembled a talented team of designers who are dedicated to bringing your
-                vision to life. Get to know some of the key members of our design team
+              At EJ Event, our team of talented designers is dedicated to turning your event dreams into reality. With a keen eye for detail and a passion for creativity, our designers will work tirelessly to bring your vision to life. From elegant table settings to enchanting floral arrangements, our designers will craft every element with precision and care.
+               Trust in our expertise to elevate your event to the next level. Let us create a masterpiece that will leave a lasting impression on you and your guests
               </p>
             </div>
           

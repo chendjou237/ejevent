@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
     <html lang="en">
-      <body className={inter.className+ "bg-slate-100"}>
+      <body className={inter.className+ " bg-[#faedcd]"}>
         <CartBookingsProvider>
           {/* <IsNotDashboard>
           </IsNotDashboard> */}

@@ -39,9 +39,9 @@ export function Services({services}: ServicesProps) {
         </p>
       </div>
     </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 sm:gap-x-32 gap-y-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-x-4 sm:gap-x-32 gap-y-8">
     {services.map((service) => (
-      <Card key={service.id} name={service.name} images={service.images} slug={service.slug} id={`${service.id}`} description={service.description}/>
+      <Card key={service.id} name={service.name} images={service.images!} slug={service.slug} id={`${service.id}`} description={service.description}/>
     ))}
       </div>
     </section>

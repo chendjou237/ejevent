@@ -22,7 +22,7 @@ import { JSX, SVGProps } from "react"
 
 export function Footer() {
   return (
-    <footer className="bg-gray-100 py-12 dark:bg-gray-800">
+    <footer className="bg-[#d4a373] py-12 dark:bg-gray-800">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="flex flex-col gap-4">
           <Link href="#" className="flex items-center gap-2" prefetch={false}>
