@@ -25,6 +25,7 @@ import { JSX, SVGProps } from "react"
 import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
 import { GalleryItemInterface } from "@/utils/types"
+import { Card } from "../ui/card"
 interface Props {
   items :  GalleryItemInterface[]
 }
@@ -34,9 +35,9 @@ export  function Gallery({items}: Props) {
     Autoplay({ delay: 2000, stopOnInteraction: true })
   )
   return (
-    <section className="w-full py-12  md:py-24 lg:py-32 bg-[#fefae0]">
-      <div className="container px-4 md:px-6">
-        <div className="grid gap-8">
+    <section className="w-full py-6  md:py-24 lg:py-32 bg-[#fefae0]">
+      <div className="container px-4 w-full md:px-6">
+        <div className="grid gap-4">
           <div className="grid gap-4">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
               Explore Our Decor Collection
@@ -45,19 +46,34 @@ export  function Gallery({items}: Props) {
             Transform your special occasions into unforgettable experiences with our exquisite decorations and event planning services. From stunning centerpieces to breathtaking backdrops, we'll bring your vision to life with style and elegance. Let us help you create magical moments that will leave a lasting impression on your guests. Explore our collection and let's make your next event truly extraordinary
             </p>
           </div>
-          <div className="">
-            <Carousel className="w-full max-w-xs" plugins={[plugin.current]}>
-              <CarouselContent className="flex aspect-square items-center justify-center p-6">
-                {...galleryData.map((data)=> <GalleryItem {...data} key={data.id} />)}
-               
+          <div className="w-full flex  justify-center">
+            <Carousel className="w-full max-w-xs md:max-w-xl lg:max-w-4xl"  opts={{
+        align: "start", 
+      }} plugins={[plugin.current]}>
+              <CarouselContent className="flex w-full aspect-square items-center justify-center ">
+                {...galleryData.map((data,i)=> <GalleryItem  {...data} key={i}  />)}
+
               </CarouselContent>
-              
             </Carousel>
           </div>
         </div>
       </div>
     </section>
   )
+}
+
+
+function GalleryItem({image, title, description}: GalleryItemProps) {
+  return (<CarouselItem className=" md:basis-1/2   lg:basis-1/3 w-full">
+              <Card  className="relative overflow-hidden w-full h-96  rounded-xl">
+                <Image src={image}   layout='fill' objectFit='cover' alt="Rustic Wall Decor" className="" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                <div className="absolute bottom-0 left-0 p-4 text-white">
+                  <h3 className="text-lg font-semibold">{title}</h3>
+                  <p className="text-sm line-clamp-3  ">{description}.</p>
+                </div>
+              </Card>
+            </CarouselItem>);
 }
 
 function ChevronLeftIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
@@ -98,20 +114,6 @@ function ChevronRightIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElemen
     </svg>
   )
 }
-
-    function GalleryItem({image, title, description}: GalleryItemProps) {
-      return (<CarouselItem>
-                  <div className="relative overflow-hidden h-96 rounded-xl">
-                    <Image src={image}   layout='fill' objectFit='cover' alt="Rustic Wall Decor" className="" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                    <div className="absolute bottom-0 left-0 p-4 text-white">
-                      <h3 className="text-lg font-semibold">{title}</h3>
-                      <p className="text-sm line-clamp-3  ">{description}.</p>
-                    </div>
-                  </div>
-                </CarouselItem>);
-    }
-  
 
 interface GalleryItemProps {
   image: string,
