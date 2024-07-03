@@ -37,7 +37,7 @@ export function Decorations({decorations}: DecorationsProps) {
       </div>
     </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-x-4 sm:gap-x-32 gap-y-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 place-items-center gap-x-4 sm:gap-x-32 gap-y-8">
       {decorations.map((decoration) => ( 
         <Card key={decoration.id} name={decoration.name} description={decoration.description} images={decoration.images!} slug={decoration.slug} id={`${decoration.id}`} />
       ))}

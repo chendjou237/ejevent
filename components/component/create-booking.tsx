@@ -47,7 +47,7 @@ interface CreateBookingProps {
     images: string[] | null;
 } 
 }
-export async function CreateBooking({item}: CreateBookingProps) {
+export  function CreateBooking({item}: CreateBookingProps) {
   const {startTime, endTime} = useBookingDate()
   const params = useParams()
   const {cart: cartItems, setCart: setCartItems} = useCartBookings() 
@@ -55,7 +55,7 @@ export async function CreateBooking({item}: CreateBookingProps) {
   const router = useRouter()
   const handleAddToCart = ()=> {
     try {
-      setCartItems([...cartItems, { ...item, start_at:startTime, end_at:endTime, quantity: 1, price: item.price!}])
+      setCartItems([...cartItems, { ...item, start_at:startTime, end_at:endTime, quantity: 1, price: item.price!, image: item.images![0]}])
       toast.success('Decoration added to cart')
       router.push('/cart')
       
@@ -97,7 +97,7 @@ export async function CreateBooking({item}: CreateBookingProps) {
         
         </div>
         <div className="grid gap-4">
-          <Card>
+          <Card className="opacity-85">
             <CardHeader>
               <CardTitle>Your Booking</CardTitle>
             </CardHeader>
@@ -121,10 +121,7 @@ export async function CreateBooking({item}: CreateBookingProps) {
                 <span>Service:</span>
                 <span id="service-display">{item?.name}</span>
               </div>
-              <div className="flex items-center justify-between font-bold"> 
-                <span>Price:</span>
-                <span id="service-display">${item?.price}</span>
-              </div>
+              
               </div>
 
               <div className="">

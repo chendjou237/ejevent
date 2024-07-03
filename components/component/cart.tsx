@@ -39,7 +39,6 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { JSX, SVGProps, useState } from "react"
-
 import { toast } from "sonner"
 import { SuccessDialog } from "./success-dialog"
 export const metaData:Metadata = {
@@ -48,6 +47,7 @@ export const metaData:Metadata = {
   
 }
 export function Cart() {
+  
   const {cart, setCart} = useCartBookings()
   const [isCreatingBooking, setIsCreatingBooking] = useState(false)
   const router = useRouter()
@@ -105,7 +105,7 @@ export function Cart() {
   }
   if(response.status === 'success'){
     toast.success('Booking Successful')
-    setCart([])
+    // setCart([])
     setIsSuccess(true)
     //router.push('/bookings')
   }
@@ -118,9 +118,9 @@ const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
       <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-8">
         <div className="space-y-6">
           {cart.map((item) => (
-            <div key={item.id} className="flex items-start gap-4 border rounded-lg p-4">
+            <div key={item.id} className="flex items-start gap-4 border rounded-lg p-4 bg-[#fbf1d7]">
               <Image
-                src="/placeholder.svg"
+                src={item.image}
                 alt={item.name}
                 width={100}
                 height={100}
@@ -167,27 +167,31 @@ const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
             </div>
           ))}
         </div>
-        <div className="space-y-6">
-          <Card>
+        <div className="space-y-6 ">
+          <Card className='opacity-90'>
             <CardHeader>
               <CardTitle>Order Summary</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
-                <span>Subtotal</span>
-                <span>${total.toFixed(2)}</span>
+                <span>Decorations</span>
+                <span>{total}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span>Services</span>
+                <span>{total}</span>
               </div>
               <Separator />
               <div className="flex items-center justify-between font-medium">
                 <span>Total</span>
-                <span>${total.toFixed(2)}</span>
+                <span>{total}</span>
               </div>
             </CardContent>
             <CardFooter>
               <Button onClick={handleAddR} className="w-full">Add resevations</Button>
             </CardFooter>
           </Card>
-          <Card>
+          <Card className='opacity-90'>
             <CardHeader>
               <CardTitle>Personal Information</CardTitle>
             </CardHeader>

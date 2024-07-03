@@ -20,7 +20,7 @@ export default function Card( {images, name, id, slug, description}: CardProps) 
    const plugin = useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   )
-   return (<div className="bg-white rounded-lg shadow-lg overflow-hidden dark:bg-gray-950 w-60">
+   return (<div className="bg-[#fefae0] rounded-lg shadow-lg overflow-hidden dark:bg-gray-950 w-60">
      <Link href="#" className="" prefetch={false}>
      <Carousel   opts={{
     align: "start",
