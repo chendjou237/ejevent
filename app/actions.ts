@@ -9,7 +9,7 @@ import { revalidatePath } from 'next/cache'
 import { Resend } from 'resend';
 import { formatDate } from 'date-fns'
 import { EmailTemplate } from "@/components/component/email-template"
-
+import {eq} from "drizzle-orm"
 
 
 export async function  createBookings  (data: Booking[])  {
@@ -34,13 +34,6 @@ export async function  createBookings  (data: Booking[])  {
         await db.insert(bookings).values(createBookings)
         const resend = new Resend(process.env.RESEND_API_KEY);
 
-await resend.emails.send({
-  from: 'Honore <chenxhenor@gmail.com>',
-  to:[ `@${data[0].user_email}`],
-  subject: ' 🎉 Congrats Your Booking was Confirmed! 🎉',
-  text: 'it works!',
-  react: EmailTemplate({firstName: data[0].user_name})  as React.ReactElement
-});
        revalidatePath('/bookings')
        return {
           message: 'Booking created successfully',
@@ -53,5 +46,23 @@ await resend.emails.send({
 
            status: 'error'
         }
+   }
+  }
+
+  export async function cancelBooking (id: number){
+   try {
+      await db.update(bookings).set({status: 'cancelled'}).where(eq(bookings.id, id ))
+      revalidatePath('/bookings')
+      return {
+         message: "your booking was cancelled successfully",
+         status: 'success'
+      }
+   } catch (error) {
+      console.error(error)
+      return {
+         status:'error',
+         message: "Please try again later"
+      }
+      
    }
   }

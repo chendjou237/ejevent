@@ -44,7 +44,6 @@ import { SuccessDialog } from "./success-dialog"
 export const metaData:Metadata = {
   title: "Cart",
   description: "Cart",
-  
 }
 export function Cart() {
   
@@ -56,14 +55,12 @@ export function Cart() {
     router.push('/#decorations')
   }
     const {isLoaded, isSignedIn, user} = useUser()
-     
     
       const [personalInfo, setPersonalInfo] = useState({
         name: user?.fullName || "",
         email: user?.primaryEmailAddress?.emailAddress || "",
         contact: user?.primaryPhoneNumber?.phoneNumber || "",
       })
-    
 
   const handleQuantityChange = (id: number, quantity: number) => {
     setCart(cart.map((item) => (item.id === id ? { ...item, quantity } : item)))
@@ -81,13 +78,13 @@ export function Cart() {
   const bookings =  cart.map((item) => {
       const booking: Booking = {
         id: undefined,
-        user_id: user?.id ,
+        user_id: user?.id,
         user_name: personalInfo.name,
         user_email: personalInfo.email,
         user_contact: personalInfo.contact,
         item_id: 1,
         item_name: item.name,
-        item_image: item.image,
+        item_image: item.name,
         start_at: item.start_at,
         end_at: item.end_at,
         status: "Pending",

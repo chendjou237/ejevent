@@ -32,6 +32,9 @@ import {Booking} from "@/utils/types"
 import { formatDate } from 'date-fns'
 import Image from "next/image"
 import { Button } from "../ui/button"
+import {useMutation} from "@tanstack/react-query"
+import { cancelBooking } from "@/app/actions"
+import { toast } from "sonner"
 
 interface BookingsProps {
   bookings: Booking[]
@@ -47,6 +50,15 @@ export function Bookings({bookings}: BookingsProps) {
   const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage
   const currentBookings = filteredBookings.slice(indexOfFirstBooking, indexOfLastBooking)
   const totalPages = Math.ceil(filteredBookings.length / bookingsPerPage)
+  const [isLoading, setLoading] = useState(false)
+  const handleCancelBooking = async (e: any,id:number) => {
+    e.preventDefault()
+    setLoading(true)
+    const {message} = await cancelBooking(id)
+      toast.success(message)
+      setLoading(false)
+    
+  }
   const handlePageChange = (pageNumber: SetStateAction<number>) => {
     setCurrentPage(pageNumber)
   }
@@ -114,7 +126,7 @@ export function Bookings({bookings}: BookingsProps) {
                     {booking.status}
                   </div>
                 </TableCell>
-                        <TableCell><Button className="bg-red-500">Cancel Reservation</Button></TableCell>
+                        <TableCell><Button onClick={e =>  handleCancelBooking} className="bg-red-500">Cancel Reservation</Button></TableCell>
               </TableRow>
             ))}
           </TableBody>

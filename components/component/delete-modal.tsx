@@ -19,8 +19,20 @@ To read more about using these font, please visit the Next.js documentation:
 **/
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription, DialogFooter, DialogClose } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-
-export function DeleteModal() {
+import { JSX, SVGProps } from "react"
+interface Props{
+  title: string,
+  description: string,
+  isLoading: boolean,
+  id: number,
+  setLoading: (value: boolean) => {},
+  callback:  (id:number) => void
+}
+export function DeleteModal({title, description, isLoading,id, callback}:Props) {
+  const handleConfirm =async (e: any) => {
+    e.preventDefault()
+    callback(id)
+  }
   return (
     <Dialog defaultOpen>
       <DialogTrigger asChild>
@@ -40,14 +52,14 @@ export function DeleteModal() {
           <div>
             <Button variant="outline">Cancel</Button>
           </div>
-          <Button variant="destructive">Confirm Delete</Button>
+          <Button variant="destructive" disabled={isLoading} onClick={}>Confirm Delete</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   )
 }
 
-function TriangleAlertIcon(props) {
+function TriangleAlertIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
