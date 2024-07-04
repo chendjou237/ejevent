@@ -26,25 +26,28 @@ export async function GET() {
     return Response.json({ error }, { status: 500 });
   }
 }
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
-    const {email, name, phone, message} = req.body
+export async function POST(req: any, res: NextApiResponse) {
+  const body = await req.json()
+
+  console.log("the body", body)
+    const {email, name, phone, message} = body
   try {
-    const { data, error } = await resend.emails.send({
-      from: 'Acme <chen@ejevent.co>',
-      to: [email],
-      subject: 'Hello world',
-      react: EmailMessageTemplate({ firstName: name, phone: phone, message: message }),
-      text: 'hey your order was confirmed',
-    });
-    console.log(data);
-    
+   const { data, error } = await resend.emails.send({
+     from: 'Acme <chen@ejevent.co>',
+     to: 'chenxhenor@gmail.com',
+     subject: 'your decoration was Reserved',  
+     react: EmailMessageTemplate({ firstName: name, phone: phone, message: message }),
+     text: 'hey your order was confirmed',
+   });
+   console.log(data);
+  if(error) console.error(error);
     
     if (error) {
         console.log(error);
       return Response.json({ error }, { status: 500 });
     }
 
-    return Response.json(data);
+    return Response.json("done");
   } catch (error) {
     return Response.json({ error }, { status: 500 });
   }

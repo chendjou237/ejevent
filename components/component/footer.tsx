@@ -59,7 +59,7 @@ export function Footer() {
                 About
               </Link>
               <Link
-                href="#"
+                href="ejevent.co/#contact-us"
                 className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
                 prefetch={false}
               >
@@ -71,7 +71,7 @@ export function Footer() {
             <h3 className="text-lg font-semibold">Follow Us</h3>
             <nav className="flex gap-4">
               <Link
-                href="https://www.instagram.com/ej_events_and_co?igsh=MWZxYzYxc2o2ejBieQ%3D%3D&utm_source=qr"
+                href="https://www.facebook.com/profile.php?id=61561140783715&mibextid=LQQJ4d"
                 className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
                 prefetch={false}
               >

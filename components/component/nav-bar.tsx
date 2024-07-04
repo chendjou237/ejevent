@@ -29,11 +29,11 @@ import { toast } from "sonner"
 export async function NavBar() {
   const {userId} = auth()
   var isAdmin: boolean = false
+  const admins = ['chenxhenor@gmail.com', 'Kenmoekendra@icloud.com', 'maivalaetitia@gmail.com']
   if(userId){
     const user = await currentUser()
-    console.log(user?.primaryEmailAddress?.emailAddress)
-    
-    isAdmin = user?.primaryEmailAddress?.emailAddress === 'chenxhenor@gmail.com' ? true : false
+    const email = user?.primaryEmailAddress?.emailAddress!
+    isAdmin =  admins.includes(email) ? true : false
    }
   return (
     <header className="flex items-center justify-between h-16 px-4 md:px-6 bg-white shadow dark:bg-gray-950">

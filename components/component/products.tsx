@@ -22,8 +22,22 @@ import { Card } from "@/components/ui/card"
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import { JSX, SVGProps } from "react"
-
-export function Products() {
+interface Props {
+  data: {
+    name: string;
+    status: string | null;
+    image: string;
+    id: number;
+    type: string;
+    description: string;
+    images: string[] | null;
+    slug: string;
+    price: number | null;
+    created_at: Date | null;
+    updated_at: Date | null;
+}[]
+}
+export function Products({data}: Props) {
   return (
     <div className="p-4 sm:p-6 md:p-8 lg:p-10">
       <div className="flex items-center justify-between mb-6">
@@ -37,104 +51,38 @@ export function Products() {
               <TableHead>Image</TableHead>
               <TableHead>Name</TableHead>
               <TableHead>Description</TableHead>
-              <TableHead>Price</TableHead>
+              {/* <TableHead>Price</TableHead> */}
               <TableHead>Status</TableHead>
               <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell>
-                <img src="/placeholder.svg" alt="Decoration 1" width={80} height={80} className="rounded-md" />
-              </TableCell>
-              <TableCell>Floral Arch</TableCell>
-              <TableCell>A beautiful floral arch perfect for weddings and events.</TableCell>
-              <TableCell>$250</TableCell>
-              <TableCell>
-                <Badge variant="secondary">Available</Badge>
-              </TableCell>
-              <TableCell>
-                <div className="flex items-center gap-2">
-                  <Button size="icon" variant="outline">
-                    <FilePenIcon className="w-4 h-4" />
-                    <span className="sr-only">Edit</span>
-                  </Button>
-                  <Button size="icon" variant="outline">
-                    <TrashIcon className="w-4 h-4" />
-                    <span className="sr-only">Delete</span>
-                  </Button>
-                </div>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <img src="/placeholder.svg" alt="Decoration 2" width={80} height={80} className="rounded-md" />
-              </TableCell>
-              <TableCell>Balloon Arch</TableCell>
-              <TableCell>A colorful balloon arch that adds a fun and festive touch.</TableCell>
-              <TableCell>$150</TableCell>
-              <TableCell>
-                <Badge variant="secondary">Available</Badge>
-              </TableCell>
-              <TableCell>
-                <div className="flex items-center gap-2">
-                  <Button size="icon" variant="outline">
-                    <FilePenIcon className="w-4 h-4" />
-                    <span className="sr-only">Edit</span>
-                  </Button>
-                  <Button size="icon" variant="outline">
-                    <TrashIcon className="w-4 h-4" />
-                    <span className="sr-only">Delete</span>
-                  </Button>
-                </div>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <img src="/placeholder.svg" alt="Decoration 3" width={80} height={80} className="rounded-md" />
-              </TableCell>
-              <TableCell>Hanging Lanterns</TableCell>
-              <TableCell>Elegant hanging lanterns that create a warm and cozy ambiance.</TableCell>
-              <TableCell>$300</TableCell>
-              <TableCell>
-                <Badge variant="outline">Unavailable</Badge>
-              </TableCell>
-              <TableCell>
-                <div className="flex items-center gap-2">
-                  <Button size="icon" variant="outline">
-                    <FilePenIcon className="w-4 h-4" />
-                    <span className="sr-only">Edit</span>
-                  </Button>
-                  <Button size="icon" variant="outline">
-                    <TrashIcon className="w-4 h-4" />
-                    <span className="sr-only">Delete</span>
-                  </Button>
-                </div>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <img src="/placeholder.svg" alt="Decoration 4" width={80} height={80} className="rounded-md" />
-              </TableCell>
-              <TableCell>Fairy Light Canopy</TableCell>
-              <TableCell>A magical fairy light canopy that creates a dreamy atmosphere.</TableCell>
-              <TableCell>$400</TableCell>
-              <TableCell>
-                <Badge variant="secondary">Available</Badge>
-              </TableCell>
-              <TableCell>
-                <div className="flex items-center gap-2">
-                  <Button size="icon" variant="outline">
-                    <FilePenIcon className="w-4 h-4" />
-                    <span className="sr-only">Edit</span>
-                  </Button>
-                  <Button size="icon" variant="outline">
-                    <TrashIcon className="w-4 h-4" />
-                    <span className="sr-only">Delete</span>
-                  </Button>
-                </div>
-              </TableCell>
-            </TableRow>
+         {
+         data.map(product => (   <TableRow>
+          <TableCell>
+            <img src={product.images![0]!} alt="Decoration 1" width={80} height={80} className="rounded-md" />
+          </TableCell>
+          <TableCell>{product.name}</TableCell>
+          <TableCell>{product.description}</TableCell>
+          {/* <TableCell>$250</TableCell> */}
+          <TableCell>
+            <Badge variant="secondary">Available</Badge>
+          </TableCell>
+          <TableCell>
+            <div className="flex items-center gap-2">
+              <Button size="icon" variant="outline">
+                <FilePenIcon className="w-4 h-4" />
+                <span className="sr-only">Edit</span>
+              </Button>
+              <Button size="icon" variant="outline">
+                <TrashIcon className="w-4 h-4" />
+                <span className="sr-only">Delete</span>
+              </Button>
+            </div>
+          </TableCell>
+        </TableRow>
+     ))
+          }
           </TableBody>
         </Table>
       </Card>

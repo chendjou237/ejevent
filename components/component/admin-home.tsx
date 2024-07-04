@@ -23,8 +23,23 @@ import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter }
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import { CalendarIcon, CheckIcon, ClockIcon, MountainIcon, XIcon } from "@/lib/icons"
-
-export function AdminHome() {
+import Image from "next/image"
+interface Props {
+  data: {
+    id: number;
+    user_id: string | null;
+    user_name: string;
+    user_email: string;
+    user_contact: string | null;
+    item_id: number;
+    item_name: string;
+    item_image: string;
+    start_at: Date | null;
+    end_at: Date | null;
+    status: string;
+}[]
+}
+export function AdminHome({data}: Props) {
   return (
       <div className="">
         <div className="flex flex-1 flex-col sm:gap-4 sm:py-4 sm:pl-14">
@@ -82,60 +97,29 @@ export function AdminHome() {
                     <TableRow>
                       <TableHead>Customer</TableHead>
                       <TableHead className="hidden sm:table-cell">Service</TableHead>
-                      <TableHead className="hidden sm:table-cell">Date</TableHead>
+                      {/* <TableHead className="hidden sm:table-cell">image</TableHead> */}
+                      <TableHead className="hidden sm:table-cell">Start Date</TableHead>
+                      <TableHead className="hidden sm:table-cell">End Date</TableHead>
                       <TableHead className="hidden md:table-cell">Status</TableHead>
                       <TableHead className="text-right">Amount</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    <TableRow>
+                   {data.map(booking => ( <TableRow>
                       <TableCell>
-                        <div className="font-medium">John Doe</div>
-                        <div className="hidden text-sm text-muted-foreground md:inline">john@example.com</div>
+                        <div className="font-medium">{booking.user_name}</div>
+                        <div className="hidden text-sm text-muted-foreground md:inline">{booking.user_email}</div>
                       </TableCell>
-                      <TableCell className="hidden sm:table-cell">Interior Design</TableCell>
+                      <TableCell className="hidden sm:table-cell">{booking.item_name}</TableCell>
+                      {/* <TableCell className="hidden sm:table-cell"><Image src={'https://' + booking.item_image} alt={`image ${booking.item_name}`} width={80} height={80} /></TableCell> */}
                       <TableCell className="hidden sm:table-cell">2023-06-23</TableCell>
+                      <TableCell className="hidden sm:table-cell">2023-06-30</TableCell>
                       <TableCell className="hidden md:table-cell">
                         <Badge variant="secondary">Pending</Badge>
                       </TableCell>
                       <TableCell className="text-right">$250.00</TableCell>
                     </TableRow>
-                    <TableRow>
-                      <TableCell>
-                        <div className="font-medium">Jane Smith</div>
-                        <div className="hidden text-sm text-muted-foreground md:inline">jane@example.com</div>
-                      </TableCell>
-                      <TableCell className="hidden sm:table-cell">Furniture Consultation</TableCell>
-                      <TableCell className="hidden sm:table-cell">2023-06-24</TableCell>
-                      <TableCell className="hidden md:table-cell">
-                        <Badge variant="secondary">Pending</Badge>
-                      </TableCell>
-                      <TableCell className="text-right">$150.00</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>
-                        <div className="font-medium">Michael Johnson</div>
-                        <div className="hidden text-sm text-muted-foreground md:inline">michael@example.com</div>
-                      </TableCell>
-                      <TableCell className="hidden sm:table-cell">Decor Styling</TableCell>
-                      <TableCell className="hidden sm:table-cell">2023-06-25</TableCell>
-                      <TableCell className="hidden md:table-cell">
-                        <Badge variant="secondary">Pending</Badge>
-                      </TableCell>
-                      <TableCell className="text-right">$350.00</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>
-                        <div className="font-medium">Emily Davis</div>
-                        <div className="hidden text-sm text-muted-foreground md:inline">emily@example.com</div>
-                      </TableCell>
-                      <TableCell className="hidden sm:table-cell">Home Staging</TableCell>
-                      <TableCell className="hidden sm:table-cell">2023-06-26</TableCell>
-                      <TableCell className="hidden md:table-cell">
-                        <Badge variant="secondary">Pending</Badge>
-                      </TableCell>
-                      <TableCell className="text-right">$450.00</TableCell>
-                    </TableRow>
+                   ))}
                   </TableBody>
                 </Table>
               </CardContent>

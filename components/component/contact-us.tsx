@@ -31,12 +31,21 @@ export function ContactUs() {
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
   const [isLoading, setLoading] = useState(false)
+  const phoneNumber = '+16476749434'
+  const messageWhatsapp = "Hello! I'm reaching out to you. from the website ejevent.co"; // Replace with your predefined message
+
+  const openWhatsApp = () => {
+
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(messageWhatsapp)}`;
+    window.open(url, '_blank');
+  };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
+   
+   
     try {
       setLoading(true)
-      const response = await fetch('ejevent.co/api/send', {
+      const response = await fetch('/api/send', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +66,6 @@ export function ContactUs() {
     toast.success("email send successfully")
     setMessage("")
     setLoading(false)
-
   }
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-[#fcf4d7]">
@@ -99,16 +107,14 @@ export function ContactUs() {
                 <Button type="submit" className="w-full md:w-auto" disabled={isLoading}>
                   Submit
                 </Button>
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-10 w-full items-center justify-center rounded-md bg-green-500 px-6 text-sm font-medium text-white shadow transition-colors hover:bg-green-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-green-600 disabled:pointer-events-none disabled:opacity-50 md:w-auto"
-                >
+                <Button
+                 onClick={openWhatsApp}
+                 className="inline-flex h-10 w-full items-center justify-center rounded-md bg-green-500 px-6 text-sm font-medium text-white shadow transition-colors hover:bg-green-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-green-600 disabled:pointer-events-none disabled:opacity-50 md:w-auto"
+                 >
                   <PhoneIcon className="mr-2 h-5 w-5" />
                   Contact us on WhatsApp
-                </a>
-              </div>
+                </Button>
+                  </div>
             </form>
           </div>
           <div className="space-y-6">
