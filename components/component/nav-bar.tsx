@@ -24,8 +24,17 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { JSX, SVGProps } from "react"
 import {  SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
-
-export function NavBar() {
+import { auth, currentUser } from "@clerk/nextjs/server";
+import { toast } from "sonner"
+export async function NavBar() {
+  const {userId} = auth()
+  var isAdmin: boolean = false
+  if(userId){
+    const user = await currentUser()
+    console.log(user?.primaryEmailAddress?.emailAddress)
+    
+    isAdmin = user?.primaryEmailAddress?.emailAddress === 'chenxhenor@gmail.com' ? true : false
+   }
   return (
     <header className="flex items-center justify-between h-16 px-4 md:px-6 bg-white shadow dark:bg-gray-950">
       <Link href="/" className="flex items-center gap-2 text-lg font-semibold" prefetch={false}>
@@ -33,10 +42,12 @@ export function NavBar() {
         <span>EJ event Inc</span>
       </Link>
       <div className="flex items-center gap-4">
+        { isAdmin ?(<Link href={'/dashboard'}><Button className="">My Dashboard</Button></Link>): null}
         <Link href={'/cart'}   className="rounded-full">
           <ShoppingCartIcon className="h-6 w-6" />
           <span className="sr-only">Cart</span>
         </Link>
+
         <SignedOut>
           <SignInButton />
         </SignedOut>

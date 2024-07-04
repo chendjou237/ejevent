@@ -33,7 +33,7 @@ export function Hero() {
             Transform Your Space with Elegant Decorations
           </h1>
           <p className="text-lg text-gray-300 sm:text-xl md:text-2xl">
-            Elevate your home or event with our expert decoration services. From custom floral arrangements to stunning
+            Elevate your event with our expert decoration services. From custom floral arrangements to stunning
             lighting, we'll bring your vision to life.
           </p>
         </div>

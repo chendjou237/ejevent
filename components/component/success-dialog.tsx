@@ -19,7 +19,7 @@ To read more about using these font, please visit the Next.js documentation:
 **/
 "use client"
 
-import { JSX, SVGProps, useState } from "react"
+import { JSX, SVGProps, useState, useEffect } from "react"
 import { Dialog, DialogContent, DialogFooter, DialogClose } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { useUser } from "@clerk/nextjs";
@@ -33,13 +33,26 @@ interface SuccessDialogProps {
 }
 
 export function SuccessDialog( { open, setOpen }: SuccessDialogProps) {
+  useEffect(() => {
+    if(open){
+      setIsConfirm(true)
+    }
+
+  }, [open])
+  
+  const [isConfirm, setIsConfirm] = useState(false)
+
   const {isLoaded, isSignedIn, user} = useUser()
   const router = useRouter()
   const handleNavigationToReservation = () => {
     router.push('/bookings')
   }
+  const handleChange = () => {
+    setIsConfirm(false)
+    setOpen(false)
+  } 
   return (
-    <Dialog open={open} onOpenChange={setOpen} defaultOpen>
+    <Dialog open={open || isConfirm} onOpenChange={handleChange} defaultOpen>
       <DialogContent className="sm:max-w-[425px]">
         <div className="flex flex-col items-center justify-center gap-4 py-8">
           <CircleCheckIcon className="size-12 text-green-500" />

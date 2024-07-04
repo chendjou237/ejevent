@@ -51,6 +51,7 @@ export function Cart() {
   const [isCreatingBooking, setIsCreatingBooking] = useState(false)
   const router = useRouter()
   const [isSuccess, setIsSuccess] = useState(false)
+
   const handleAddR = () => { 
     router.push('/#decorations')
   }
@@ -101,11 +102,18 @@ export function Cart() {
       toast.error(response.message)
   }
   if(response.status === 'success'){
-    toast.success('Booking Successful')
-    // setCart([])
     setIsSuccess(true)
+    toast.success('Booking Successful, an email was sent to you')
+    setCart([])
+    
+    if(user)
+      router.push('/bookings')
+    else 
+      router.push('/sign-in')
     //router.push('/bookings')
   }
+  
+
 }
 const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
   return (

@@ -8,13 +8,13 @@ import { randomInt } from "crypto"
 import { revalidatePath } from 'next/cache'
 import { Resend } from 'resend';
 import { formatDate } from 'date-fns'
-import { EmailTemplate } from "@/components/component/email-template"
+import { EmailBookingTemplate } from "@/components/component/email-template"
 import {eq} from "drizzle-orm"
 
 
-export async function  createBookings  (data: Booking[])  {
+export async function  createBookings  (body: Booking[])  {
    try {
-     const createBookings =  data.map(datum => {
+     const createBookings =  body!.map(datum => {
          return {...datum, id: randomInt(1000), status: 'pending', slug: datum.item_name.replace(/\s+/g, '-').toLowerCase() }
       })
       /*  const booking: Booking = {
@@ -33,7 +33,16 @@ export async function  createBookings  (data: Booking[])  {
     
         await db.insert(bookings).values(createBookings)
         const resend = new Resend(process.env.RESEND_API_KEY);
-
+        const startDate = `${body[0].start_at?.toLocaleDateString()}`
+        const end_date = `${body[0].end_at?.toLocaleDateString()}`
+         const {data} = await resend.emails.send({
+            from: 'Acme <chen@ejevent.co>',
+            to: [body[0].user_email],
+            subject: "booking confirmed",
+            react: EmailBookingTemplate({name: body[0].user_name,startDate: startDate, endDate: end_date }),
+            text: "Your bookings were successful"
+         })
+         console.log("the email id is", data)
        revalidatePath('/bookings')
        return {
           message: 'Booking created successfully',

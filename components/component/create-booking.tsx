@@ -71,7 +71,7 @@ export  function CreateBooking({item}: CreateBookingProps) {
         <h2 className="text-2xl font-bold tracking-tight">Book Your Decoration Appointment</h2>
         <p className="text-muted-foreground">Select a date and time that works best for you.</p>
       </div>
-      <div className="grid md:grid-cols-1 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2  gap-8">
         <div className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="date">Date</Label>
@@ -102,24 +102,24 @@ export  function CreateBooking({item}: CreateBookingProps) {
               <CardTitle>Your Booking</CardTitle>
             </CardHeader>
             <CardContent className="grid gap-4">
-              <div className="flex justify-between flex-row">
+              <div className="flex justify-between space-x-8 flex-row">
 
-              <div className="">
+              <div className="flex flex-col space-y-4">
               <div className="flex items-center justify-between">
-                <span>Scheduled date:</span>
-                <span id="date-display"> {formatDate(startTime, 'MM/dd/yyyy')} </span>
+                <span>Scheduled dates:</span>
+                <span id="date-display"> {formatDate(  Date.now(), 'MM/dd/yyyy')} </span>
               </div>
               <div className="flex items-center justify-between">
-                <span>Start at:</span>
-                <span id="time-display">{startTime.toLocaleTimeString()} </span>
+                <span>Start Date:</span>
+                <span id="time-display">{formatDate(  startTime ?? new Date( Date.now()), 'MM/dd/yyyy')} </span>
               </div>
               <div className="flex items-center justify-between">
-                <span>End at:</span>
-                <span id="time-display">{endTime.toLocaleTimeString()}</span>
+                <span>End Date:</span>
+                <span id="time-display">{formatDate(endTime ?? new Date( Date.now()), 'MM/dd/yyyy')}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span>Service:</span>
-                <span id="service-display">{item?.name}</span>
+                <span>Service: </span>
+                <span id="service-display"> {" "+item?.name}</span>
               </div>
               
               </div>
