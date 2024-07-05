@@ -112,10 +112,10 @@ export function Cart() {
       router.push('/sign-in')
     //router.push('/bookings')
   }
-  
-
 }
-const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
+const total = cart.length
+const services = cart.filter(data => data.type === 'service').length
+const products = cart.filter(data => data.type === 'product').length
   return (
     <div className="container mx-auto py-8 md:py-12">
       <SuccessDialog open={isSuccess} setOpen={setIsSuccess}/>
@@ -135,9 +135,9 @@ const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
                 <h3 className="text-lg font-medium">{item.name}</h3>
                 <p className="text-sm text-muted-foreground">{item.description}</p>
                 <div className="flex items-center gap-2 mt-2">
-                  <span className="font-medium">${item.price}</span>
+                  {/* <span className="font-medium">${item.price}</span> */}
                   <Separator orientation="vertical" className="h-5" />
-                  <div className="flex items-center gap-2">
+                {/*   <div className="flex items-center gap-2">
                     <Button
                       size="icon"
                       variant="outline"
@@ -154,15 +154,15 @@ const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
                     > 
                       <PlusIcon className="w-4 h-4" />
                     </Button>
-                  </div>
+                  </div> */}
                 </div>
-                <div className="mt-2 text-sm text-muted-foreground">
-                  <span>
-                    Booking Date: {format(item.start_at, "HH:mm")} - {format(item.end_at, "HH:mm")}
+                <div className="mt-2 text-sm text-muted-foreground ">
+                  <span className='font-medium'>
+                    Start Date: {format(item.start_at, "MM-dd")}
                   </span>
                   <Separator orientation="vertical" className="mx-2" />
-                  <span>
-                    Time: {format(item.start_at, "HH:mm")} - {format(item.end_at, "HH:mm")}
+                  <span className='font-medium'>
+                    End Date: {format(item.end_at,  "MM-dd")}
                   </span>
                 </div>
               </div>
@@ -180,11 +180,11 @@ const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <span>Decorations</span>
-                <span>{total}</span>
+                <span>{products}</span>
               </div>
               <div className="flex items-center justify-between">
                 <span>Services</span>
-                <span>{total}</span>
+                <span>{services}</span>
               </div>
               <Separator />
               <div className="flex items-center justify-between font-medium">

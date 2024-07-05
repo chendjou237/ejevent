@@ -28,7 +28,8 @@ export interface CartItem{
    quantity: number,
    start_at: Date,
    end_at: Date,
-image: string
+image: string,
+   type: string,
 }
 
 export interface Booking {

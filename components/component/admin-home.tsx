@@ -97,7 +97,7 @@ export function AdminHome({data}: Props) {
                     <TableRow>
                       <TableHead>Customer</TableHead>
                       <TableHead className="hidden sm:table-cell">Service</TableHead>
-                      {/* <TableHead className="hidden sm:table-cell">image</TableHead> */}
+                      <TableHead className="hidden sm:table-cell">image</TableHead>
                       <TableHead className="hidden sm:table-cell">Start Date</TableHead>
                       <TableHead className="hidden sm:table-cell">End Date</TableHead>
                       <TableHead className="hidden md:table-cell">Status</TableHead>

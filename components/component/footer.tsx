@@ -96,7 +96,7 @@ export function Footer() {
         </div>
       </div>
       <div className="container mx-auto mt-8 flex items-center justify-between">
-        <p className="text-sm text-gray-500 dark:text-gray-400">&copy; 2024 Decor Delights. All rights reserved.</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400">&copy; 2024 EJ Event. All rights reserved.</p>
         <nav className="flex gap-4">
           <Link
             href="#"
