@@ -7,6 +7,7 @@ import { db } from "./db"
 import { bookings, decorations } from "./db/schema"
 import {shuffleList} from "@/utils/helpers"
 import { GalleryItemInterface } from "@/utils/types"
+import { clerkClient } from '@clerk/nextjs/server';
 
 
 export async function getServices (){
@@ -114,5 +115,12 @@ export async function getGalleryItems(){
    })
  return shuffleList( gallery)
 
+}
+
+export async function getUserList(){
+   const response = await clerkClient.users.getUserList();
+   console.log(response);
+   const data = response.data.map(user => {user.id, user.banned, user.fullName, user.imageUrl, user.primaryEmailAddress?.emailAddress, user.primaryPhoneNumber?.phoneNumber})
+   return data
 }
 

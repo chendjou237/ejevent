@@ -1,6 +1,7 @@
 import { Users } from "@/components/component/users";
 
-export default function page() {
+export default async function page() {
+
   return (
     <div><Users /></div>
   )
