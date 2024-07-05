@@ -24,6 +24,9 @@ import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@
 import { Badge } from "@/components/ui/badge"
 import { CalendarIcon, CheckIcon, ClockIcon, MountainIcon, XIcon } from "@/lib/icons"
 import Image from "next/image"
+import { format } from "date-fns"
+import { ConfirmBookingDialog } from "./delete-modal"
+import { SVGProps } from "react"
 interface Props {
   data: {
     id: number;
@@ -40,6 +43,9 @@ interface Props {
 }[]
 }
 export function AdminHome({data}: Props) {
+  const pendings = data.filter(d => d.status === 'pending' ).length ?? 0
+  const confirmeds = data.filter(d => d.status === 'confirmed' ).length ?? 0
+  const cancelleds = data.filter(d => d.status === 'cancelled' ).length ?? 0
   return (
       <div className="">
         <div className="flex flex-1 flex-col sm:gap-4 sm:py-4 sm:pl-14">
@@ -51,7 +57,7 @@ export function AdminHome({data}: Props) {
                   <CalendarIcon className="w-4 h-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">1,234</div>
+                  <div className="text-2xl font-bold">{data.length ?? 0}</div>
                   <p className="text-xs text-muted-foreground">+20.1% from last month</p>
                 </CardContent>
               </Card>
@@ -61,7 +67,7 @@ export function AdminHome({data}: Props) {
                   <ClockIcon className="w-4 h-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">234</div>
+                  <div className="text-2xl font-bold">{pendings}</div>
                   <p className="text-xs text-muted-foreground">+10.5% from last month</p>
                 </CardContent>
               </Card>
@@ -71,7 +77,7 @@ export function AdminHome({data}: Props) {
                   <CheckIcon className="w-4 h-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">1,000</div>
+                  <div className="text-2xl font-bold">{confirmeds}</div>
                   <p className="text-xs text-muted-foreground">+15% from last month</p>
                 </CardContent>
               </Card>
@@ -81,7 +87,7 @@ export function AdminHome({data}: Props) {
                   <XIcon className="w-4 h-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">234</div>
+                  <div className="text-2xl font-bold">{cancelleds}</div>
                   <p className="text-xs text-muted-foreground">-5% from last month</p>
                 </CardContent>
               </Card>
@@ -97,27 +103,29 @@ export function AdminHome({data}: Props) {
                     <TableRow>
                       <TableHead>Customer</TableHead>
                       <TableHead className="hidden sm:table-cell">Service</TableHead>
-                      <TableHead className="hidden sm:table-cell">image</TableHead>
                       <TableHead className="hidden sm:table-cell">Start Date</TableHead>
                       <TableHead className="hidden sm:table-cell">End Date</TableHead>
                       <TableHead className="hidden md:table-cell">Status</TableHead>
-                      <TableHead className="text-right">Amount</TableHead>
+                      <TableHead className="hidden sm:table-cell">image</TableHead>
+                      <TableHead className="hidden sm:table-cell">Actions</TableHead>
+                      {/* <TableHead className="text-right">Amount</TableHead> */}
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                   {data.map(booking => ( <TableRow>
+                   {data.map(booking => ( <TableRow key={booking.id}>
                       <TableCell>
                         <div className="font-medium">{booking.user_name}</div>
                         <div className="hidden text-sm text-muted-foreground md:inline">{booking.user_email}</div>
                       </TableCell>
                       <TableCell className="hidden sm:table-cell">{booking.item_name}</TableCell>
-                      {/* <TableCell className="hidden sm:table-cell"><Image src={'https://' + booking.item_image} alt={`image ${booking.item_name}`} width={80} height={80} /></TableCell> */}
-                      <TableCell className="hidden sm:table-cell">2023-06-23</TableCell>
-                      <TableCell className="hidden sm:table-cell">2023-06-30</TableCell>
+                      <TableCell className="hidden sm:table-cell">{format(booking.start_at!, 'yyyy-MM-dd')}</TableCell>
+                      <TableCell className="hidden sm:table-cell">{format(booking.end_at!, 'yyyy-MM-dd')}</TableCell>
                       <TableCell className="hidden md:table-cell">
-                        <Badge variant="secondary">Pending</Badge>
+                        <Badge variant="secondary">{booking.status}</Badge>
                       </TableCell>
-                      <TableCell className="text-right">$250.00</TableCell>
+                      <TableCell className="hidden sm:table-cell"><Image src={ booking.item_image} alt={`image ${booking.item_name}`} width={80} height={80} /></TableCell>
+                      {/* <TableCell className="text-right">$250.00</TableCell> */}
+                     {booking.status !== 'confirmed' ? <TableCell className="hidden sm:table-cell">{<ConfirmBookingDialog booking={booking} />}</TableCell>: null}
                     </TableRow>
                    ))}
                   </TableBody>

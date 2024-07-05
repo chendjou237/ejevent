@@ -33,7 +33,7 @@ image: string,
 }
 
 export interface Booking {
-   id: number | undefined | null,
+   id: number  ,
    user_id: string | undefined | null,
    user_name: string,
    user_email: string,

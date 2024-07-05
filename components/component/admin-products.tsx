@@ -32,12 +32,13 @@ interface Props {
     description: string;
     images: string[] | null;
     slug: string;
-    price: number | null;
+    // price: number | null;
     created_at: Date | null;
     updated_at: Date | null;
 }[]
 }
-export function Products({data}: Props) {
+export function AdminProducts({data}: Props) {
+  
   return (
     <div className="p-4 sm:p-6 md:p-8 lg:p-10">
       <div className="flex items-center justify-between mb-6">
@@ -73,6 +74,10 @@ export function Products({data}: Props) {
               <Button size="icon" variant="outline">
                 <FilePenIcon className="w-4 h-4" />
                 <span className="sr-only">Edit</span>
+              </Button>
+              <Button size="icon" variant="outline">
+                <UploadIcon className="w-4 h-4" />
+                <span className="sr-only">Upload</span>
               </Button>
               <Button size="icon" variant="outline">
                 <TrashIcon className="w-4 h-4" />
@@ -111,6 +116,26 @@ function FilePenIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   )
 }
 
+function UploadIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 22h6a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v10" />
+      <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+      <path d="M10.4 12.6a2 2 0 1 1 3 3L8 21l-4 1 1-4Z" />
+    </svg>
+  );
+}
 
 function TrashIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (

@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { CartBookingsProvider } from '../contexts/CartBookingsContext';
 import "./globals.css";
+import QueryProvider from "@/components/component/query-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,6 +32,7 @@ export default function RootLayout({
     <ClerkProvider>
     <html lang="en">
       <body className={inter.className+ " bg-[#faedcd]"}>
+        <QueryProvider>
         <CartBookingsProvider>
           {/* <IsNotDashboard>
           </IsNotDashboard> */}
@@ -40,6 +42,7 @@ export default function RootLayout({
         </CartBookingsProvider>
         <Footer />
       <Toaster />
+      </QueryProvider>
       </body>
     </html>
     </ClerkProvider>

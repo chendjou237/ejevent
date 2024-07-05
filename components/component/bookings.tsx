@@ -107,7 +107,7 @@ export function Bookings({bookings}: BookingsProps) {
           <TableBody>
             {currentBookings.map((booking) => (
               <TableRow key={booking.id}>
-                <TableCell><Image src={booking.item_image} alt={booking.item_name} height={100} width={100}/> </TableCell>
+                <TableCell><Image src={booking.item_image ?? '/placeholder.jpg'} alt={booking.item_name} height={100} width={100}/> </TableCell>
                 <TableCell>{formatDate(booking.start_at!, 'MM/dd/yyyy')}</TableCell>
                 <TableCell>{booking.start_at!.toLocaleTimeString()}</TableCell>
                 <TableCell>{booking.end_at!.toLocaleTimeString()}</TableCell>

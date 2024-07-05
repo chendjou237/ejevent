@@ -1,9 +1,9 @@
-import { Products } from "@/components/component/products";
+import { AdminProducts } from "@/components/component/admin-products";
 import { getDecorations, getProducts } from "@/server/queries";
 
 export default async function  page() {
   const data = await getProducts()
   return (
-    <div><Products data={data} /></div>
+    <div><AdminProducts data={data} /></div>
   )
 }
