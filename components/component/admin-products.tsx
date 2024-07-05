@@ -22,6 +22,8 @@ import { Card } from "@/components/ui/card"
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import { JSX, SVGProps } from "react"
+import { DecorationCreationDialog, DecorationEditDialog } from "./decoration-dialog"
+import { DeleteDecoration } from "./delete-modal"
 interface Props {
   data: {
     name: string;
@@ -43,7 +45,7 @@ export function AdminProducts({data}: Props) {
     <div className="p-4 sm:p-6 md:p-8 lg:p-10">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">Decorations</h1>
-        <Button size="sm">Add Decoration</Button>
+        <DecorationCreationDialog type="product"/>
       </div>
       <Card>
         <Table>
@@ -71,18 +73,8 @@ export function AdminProducts({data}: Props) {
           </TableCell>
           <TableCell>
             <div className="flex items-center gap-2">
-              <Button size="icon" variant="outline">
-                <FilePenIcon className="w-4 h-4" />
-                <span className="sr-only">Edit</span>
-              </Button>
-              <Button size="icon" variant="outline">
-                <UploadIcon className="w-4 h-4" />
-                <span className="sr-only">Upload</span>
-              </Button>
-              <Button size="icon" variant="outline">
-                <TrashIcon className="w-4 h-4" />
-                <span className="sr-only">Delete</span>
-              </Button>
+              <DecorationEditDialog  decoration={product}/>
+              <DeleteDecoration id={product.id} />
             </div>
           </TableCell>
         </TableRow>

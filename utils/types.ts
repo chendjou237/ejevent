@@ -12,7 +12,6 @@ export interface Decoration {
    id: number,
    name: string,
    description: string,
-   price: number | undefined | null,
    image: string,
    type: string,
    status: string  | undefined | null,
