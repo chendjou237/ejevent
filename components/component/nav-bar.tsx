@@ -33,7 +33,8 @@ export async function NavBar() {
   if(userId){
     const user = await currentUser()
     const email = user?.primaryEmailAddress?.emailAddress!
-    isAdmin =  admins.includes(email) ? true : false
+    isAdmin =  true
+    // isAdmin =  admins.includes(email) ? true : false
    }
   return (
     <header className="flex items-center justify-between h-16 px-4 md:px-6 bg-white shadow dark:bg-gray-950">
