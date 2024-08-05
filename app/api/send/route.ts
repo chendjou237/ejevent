@@ -34,7 +34,7 @@ export async function POST(req: any, res: NextApiResponse) {
   try {
    const { data, error } = await resend.emails.send({
      from: 'Acme <chen@ejevent.co>',
-     to: 'chenxhenor@gmail.com',
+     to: ['chenxhenor@gmail.com', 'maivalaetitia@gmail.com'],
      subject: 'your decoration was Reserved',  
      react: EmailMessageTemplate({ firstName: name, phone: phone, message: message }),
      text: 'hey your order was confirmed',
