@@ -40,7 +40,7 @@ export async function  createBookings  (body: Booking[])  {
         const end_date = `${body[0].end_at?.toLocaleDateString()}`
          const {data} = await resend.emails.send({
             from: 'Acme <chen@ejevent.co>',
-            to: [body[0].user_email],
+            to: [body[0].user_email, 'maivalaetitia@gmail.com'],
             subject: "booking confirmed",
             react: EmailBookingTemplate({name: body[0].user_name,startDate: startDate, endDate: end_date }),
             text: "Your bookings were successful"
