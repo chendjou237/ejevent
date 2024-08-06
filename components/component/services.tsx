@@ -40,7 +40,7 @@ export function Services({services}: ServicesProps) {
       </div>
     </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 place-items-center gap-x-4 sm:gap-x-32 gap-y-8">
-    {services.map((service) => (
+    {services.slice(0,3).map((service) => (
       <Card key={service.id} name={service.name} images={service.images!} slug={service.slug} id={`${service.id}`} description={service.description}/>
     ))}
       </div>

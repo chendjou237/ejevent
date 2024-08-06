@@ -32,7 +32,7 @@ export default function Card( {images, name, id, slug, description}: CardProps) 
       onMouseLeave={plugin.current.reset}
   >
   <CarouselContent className="">
-    {images.map((image, index) => (
+    {images.slice(0,3).map((image, index) => (
       <CarouselItem key={index} className="pl-2 md:pl-4">
         <Image src={image} alt={name} width={700} height={400}  className=" h-48 object-cover"/>
       </CarouselItem>

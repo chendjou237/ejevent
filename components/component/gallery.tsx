@@ -64,7 +64,8 @@ export  function Gallery({items}: Props) {
 function GalleryItem({image, title, description}: GalleryItemProps) {
   return (<CarouselItem className=" md:basis-1/2   lg:basis-1/3 ">
               <Card  className="relative overflow-hidden w-full h-96  rounded-xl">
-                <Image src={image} placeholder="blur"  layout='fill' objectFit='cover' alt="Rustic Wall Decor" className="" />
+                <Image src={image} placeholder="blur"   priority={true}
+  layout='fill' objectFit='cover' alt="Rustic Wall Decor" className="" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-4 text-white">
                   <h3 className="text-lg font-semibold">{title}</h3>
