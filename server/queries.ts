@@ -113,7 +113,7 @@ export async function getGalleryItems(){
       })
     })
    })
- return shuffleList( gallery.slice(0,6))
+ return shuffleList( gallery)
 
 }
 
