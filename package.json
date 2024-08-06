@@ -57,6 +57,7 @@
     "react-hook-form": "^7.52.0",
     "react-spinners": "^0.14.1",
     "resend": "^3.3.0",
+    "sharp": "^0.33.4",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",

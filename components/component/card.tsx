@@ -34,7 +34,7 @@ export default function Card( {images, name, id, slug, description}: CardProps) 
   <CarouselContent className="">
     {images.map((image, index) => (
       <CarouselItem key={index} className="pl-2 md:pl-4">
-        <Image src={image} alt={name} width={700} height={400} className=" h-48 object-cover"/>
+        <Image src={image} alt={name} width={700} height={400} placeholder="blur" className=" h-48 object-cover"/>
       </CarouselItem>
     ))}
     

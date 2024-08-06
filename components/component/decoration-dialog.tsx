@@ -32,22 +32,33 @@ export function DecorationEditDialog({decoration}: EditProps) {
     
     const { openFilePicker, filesContent, loading } = useFilePicker({
         accept: 'image/*',
+        
         onFilesSelected:async ({ plainFiles, filesContent, errors }) => {
+          setLoadingImage(true)
+
             // this callback is always called, even if there are errors
             console.log('onFilesSelected', plainFiles, filesContent, errors);
- 
-            const path = await uploadFile(plainFiles[0], 'decorations/')
-            const image = await getFile(path)
-            setImages([...images!,  image])
+         if(plainFiles.length > 0){   
+     const newImages =   await   handleImages(plainFiles)
+            setImages([...images!,  ...newImages])
+          }else toast.error('please select an image')
             setLoadingImage(false)
           },
       });
     const handleAddImage =async  ()=> {
-        setLoadingImage(true)
        openFilePicker()
       
 
     }
+    const handleImages =  async(images:any )=> {
+      var links: string[] = []
+      for(var ima in images){
+        const path = await uploadFile(ima, 'decorations/')
+        const image = await getFile(path)
+        links.push(image)
+      }
+      return links
+    };
     const [name, setName] = useState(decoration.name)
     const [description, setDescription] = useState(decoration.description)
     const [images, setImages] = useState(decoration.images)

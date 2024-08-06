@@ -35,9 +35,8 @@ export  function Gallery({items}: Props) {
     Autoplay({ delay: 2000, stopOnInteraction: true })
   )
   return (
-    <section className="w-full py-6  md:py-24 lg:py-32 bg-[#fefae0]">
+    <section className="w-full py-3  md:py-24 lg:py-8 bg-[#fefae0]">
       <div className="container px-4 w-full md:px-6 ">
-        <div className="grid gap-4 ">
           <div className="grid gap-4">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
               Explore Our Decor Collection
@@ -45,12 +44,11 @@ export  function Gallery({items}: Props) {
             <p className="text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
             Transform your special occasions into unforgettable experiences with our exquisite decorations and event planning services. From stunning centerpieces to breathtaking backdrops, we'll bring your vision to life with style and elegance. Let us help you create magical moments that will leave a lasting impression on your guests. Explore our collection and let's make your next event truly extraordinary
             </p>
-          </div>
-          <div className="w-full flex justify-center content ">
-            <Carousel className="w-full  max-w-xs md:max-w-xl lg:max-w-4xl"  opts={{
+          <div className="w-full flex  justify-center content ">
+            <Carousel className="w-full  max-w-xs md:max-w-xl     lg:max-w-4xl"  opts={{
         align: "start", 
       }} plugins={[plugin.current]}>
-              <CarouselContent className="flex w-full aspect-square items-center justify-center ">
+              <CarouselContent className="flex w-full aspect-square h-96 items-center justify-center ">
                 {...galleryData.map((data,i)=> <GalleryItem  {...data} key={i}  />)}
 
               </CarouselContent>
@@ -66,7 +64,7 @@ export  function Gallery({items}: Props) {
 function GalleryItem({image, title, description}: GalleryItemProps) {
   return (<CarouselItem className=" md:basis-1/2   lg:basis-1/3 ">
               <Card  className="relative overflow-hidden w-full h-96  rounded-xl">
-                <Image src={image}   layout='fill' objectFit='cover' alt="Rustic Wall Decor" className="" />
+                <Image src={image} placeholder="blur"  layout='fill' objectFit='cover' alt="Rustic Wall Decor" className="" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-4 text-white">
                   <h3 className="text-lg font-semibold">{title}</h3>
