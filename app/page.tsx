@@ -6,6 +6,7 @@ import { Hero } from "@/components/component/hero";
 import { Services } from "@/components/component/services";
 import {getHomeData} from "@/server/queries";
 import {Suspense} from "react"
+import { SectionLoader } from "@/components/section-loader";
 export default  function Page() {
   return (
     
@@ -14,7 +15,7 @@ export default  function Page() {
     <main className="">
 
      <AboutUs />
-     <Suspense fallback={<div>Loading...</div>}>
+     <Suspense fallback={<SectionLoader />}>
      <ItemsSection />
      </Suspense>
      <ContactUs />
