@@ -26,6 +26,7 @@ import { JSX, SVGProps } from "react"
 import {  SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { toast } from "sonner"
+import Image from "next/image"
 export async function NavBar() {
   const {userId} = auth()
   var isAdmin: boolean = false
@@ -39,7 +40,7 @@ export async function NavBar() {
   return (
     <header className="flex items-center justify-between h-16 px-4 md:px-6 bg-white shadow dark:bg-gray-950">
       <Link href="/" className="flex items-center gap-2 text-lg font-semibold" prefetch={false}>
-        <MountainIcon className="h-6 w-6" />
+        <Image  src={'/logo.png'} alt="logo" width={32} height={32} />
         <span>EJ event Inc</span>
       </Link>
       <div className="flex items-center gap-4">
