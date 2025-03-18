@@ -1,0 +1,133 @@
+{
+   "nav": {
+      "home": "Accueil",
+      "gallery": "Galerie",
+      "bookings": "Réservations",
+      "dashboard": "Tableau de bord"
+   },
+   "hero": {
+      "title": "Transformez Votre Espace avec des Décorations Élégantes",
+      "description": "Sublimez votre événement avec nos services de décoration experts. Des arrangements floraux personnalisés aux éclairages spectaculaires, nous donnons vie à votre vision.",
+      "button": "Réserver une consultation"
+   },
+   "about-us": {
+      "point-1-title": "Notre Mission",
+      "point-1-description": "Chez EJevent Decoration, notre mission est de fournir des services de décoration exceptionnels qui transforment les espaces et créent des expériences inoubliables. Nous croyons au pouvoir de la créativité et de l'innovation pour élever l'ambiance de tout événement ou lieu.",
+      "point-2-title": "Nos Valeurs",
+      "point-2-description": "EJ Event, où nous croyons que chaque célébration doit être un chef-d'œuvre de beauté, d'élégance et de personnalisation. Notre passion pour le design, notre attention aux détails et notre dévouement à créer des expériences inoubliables nous distinguent. Chez EJ Event, nous ne planifions pas simplement des événements – nous créons des moments enchanteurs qui reflètent votre style unique et votre vision. Des décorations exquises à la coordination harmonieuse, nous insufflons de la créativité et du soin dans chaque détail pour transformer votre événement en une expérience magique et inoubliable.",
+      "point-3-title": "Rencontrez Nos Designers",
+      "point-3-description": "Chez EJ Event, notre équipe de designers talentueux se consacre à transformer vos rêves d'événements en réalité. Avec un œil aiguisé pour les détails et une passion pour la créativité, nos designers travailleront sans relâche pour donner vie à votre vision. Des élégantes décorations de table aux arrangements floraux enchanteurs, nos designers élaboreront chaque élément avec précision et soin.",
+      "button": "Soumettre"
+   },
+   "gallery": {
+      "title": "Explorez Notre Collection de Décoration",
+      "description": "Transformez vos occasions spéciales en expériences inoubliables avec nos services de décoration et de planification d'événements exquis. Des centres de table magnifiques aux toiles de fond à couper le souffle, nous donnerons vie à votre vision avec style et élégance."
+   },
+   "decorations": {
+      "title": "Décorez Votre Espace",
+      "description": "Parcourez notre collection sélectionnée de pièces décoratives pour transformer votre intérieur."
+   },
+   "services": {
+      "title": "Services de Décoration d'Événements",
+      "description": "Transformez vos célébrations avec nos services de décoration sur mesure, conçus pour rendre votre journée spéciale inoubliable."
+   },
+   "contact-us": {
+      "title": "Contactez-nous",
+      "description": "Vous avez une question ou souhaitez réserver une consultation ? Remplissez le formulaire ci-dessous et nous vous répondrons dès que possible.",
+      "name-label": "Nom",
+      "name-placeholder": "Entrez votre nom",
+      "email-label": "Email",
+      "email-placeholder": "Entrez votre email",
+      "phone-label": "Téléphone",
+      "phone-placeholder": "Entrez votre numéro de téléphone",
+      "message-label": "Message",
+      "message-placeholder": "Entrez un message descriptif",
+      "button": "Contactez Nous",
+      "whatsapp-button": "Contactez Nous Sur ",
+      "contact-information-title": "Informations de Contact",
+      "business-hour": "Heures d'Ouverture",
+      "business-time": "Lundi - Vendredi: 9h - 17h",
+      "closed-time": "Samedi - Dimanche: Fermé"
+   },
+   "common": {
+      "loading": "Chargement...",
+      "error": "Une erreur est survenue",
+      "success": "Succès",
+      "submit": "Envoyer",
+      "cancel": "Annuler",
+      "save": "Sauvegarder",
+      "delete": "Supprimer",
+      "edit": "Modifier",
+      "view": "Voir"
+   },
+   "auth": {
+      "signIn": "Se connecter",
+      "signUp": "S'inscrire",
+      "signOut": "Se déconnecter"
+   },
+   "bookings": {
+      "title": "Réserver Votre Événement",
+      "selectDate": "Sélectionner une date",
+      "selectTime": "Sélectionner une heure",
+      "eventType": "Type d'événement",
+      "guestCount": "Nombre d'invités",
+      "specialRequests": "Demandes spéciales",
+      "submit": "Réserver maintenant",
+      "success": "Réservation confirmée",
+      "error": "Échec de la réservation"
+   },
+   "language": {
+      "select": "Sélectionner la langue",
+      "en": "Anglais",
+      "fr": "Français"
+   },
+   "LocaleSwitcher": {
+      "switchLocale": "Passer en {locale, select, fr {Français} en {Anglais} other {Inconnu}}"
+   },
+   "createBooking": {
+      "title": "Réserver Votre Rendez-vous de Décoration",
+      "subtitle": "Sélectionnez une date et une heure qui vous conviennent le mieux.",
+      "date": "Date",
+      "booking": {
+         "title": "Votre Réservation",
+         "scheduledDates": "Dates prévues :",
+         "startDate": "Date de début :",
+         "endDate": "Date de fin :",
+         "service": "Service :"
+      },
+      "addToCart": "Ajouter au panier"
+   },
+   "cart": {
+      "title": "Votre Panier",
+      "orderSummary": {
+         "title": "Résumé de la Commande",
+         "decorations": "Décorations",
+         "services": "Services",
+         "total": "Total",
+         "addReservations": "Ajouter des Réservations",
+         "startDate": "Date de Début",
+         "endDate": "Date de Fin"
+      },
+      "personalInfo": {
+         "title": "Informations Personnelles",
+         "name": {
+            "label": "Nom",
+            "placeholder": "Entrez votre nom"
+         },
+         "email": {
+            "label": "Email",
+            "placeholder": "Entrez votre email"
+         },
+         "phone": {
+            "label": "Téléphone",
+            "placeholder": "Entrez votre numéro de téléphone"
+         },
+         "confirmButton": "Confirmer la Réservation"
+      },
+      "toasts": {
+         "creatingBooking": "Création de la Réservation",
+         "bookingSuccess": "Réservation réussie, un email vous a été envoyé",
+         "bookingError": "Une erreur est survenue lors de la création de votre réservation"
+      }
+   }
+}

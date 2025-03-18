@@ -10,8 +10,8 @@ export interface Service {
 
 export interface Decoration {
    id: number,
-   name: string,
-   description: string,
+   name: {[key:string]:string} | null,
+   description: {[key:string]:string} | null,
    image: string,
    type: string,
    status: string  | undefined | null,
@@ -23,7 +23,7 @@ export interface CartItem{
    name: string,
    description:string,
    price: number,
-   id: number, 
+   id: number,
    quantity: number,
    start_at: Date,
    end_at: Date,
@@ -53,8 +53,8 @@ enum Status {
 }
 
 export interface GalleryItemInterface{
-   title: string, 
-   description: string,
+   title: {[key:string]:string},
+   description: {[key:string]:string},
    image: string,
    id: number,
 }

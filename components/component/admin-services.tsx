@@ -27,15 +27,17 @@ import Image from "next/image"
 import { getServices } from "@/server/queries"
 import { DecorationCreationDialog, DecorationEditDialog } from "./decoration-dialog"
 import { DeleteDecoration } from "./delete-modal"
+import { getLocale } from "next-intl/server"
 
 export async function AdminServices() {
+   const locale = await getLocale()
    const services = await getServices()
   return (
     <div className="p-4 sm:p-6 md:p-8 lg:p-10">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">Services</h1>
        <DecorationCreationDialog type={'service'}/>
-        
+
       </div>
       <Card>
         <Table>
@@ -76,10 +78,10 @@ export async function AdminServices() {
           {services.map((service) => (
             <TableRow key={service.id}>
                <TableCell>
-                  <Image src={service.images![0]} alt={service.name} width={80} height={80} className="rounded-md" />
+                  <Image src={service.images![0]} alt={service.name[locale]} width={80} height={80} className="rounded-md" />
                </TableCell>
-               <TableCell>{service.name}</TableCell>
-               <TableCell>{service.description}</TableCell>
+               <TableCell>{service.name[locale]}</TableCell>
+               <TableCell>{service.description[locale]}</TableCell>
                {/* <TableCell>${service.price}</TableCell> */}
                <TableCell>
                   <Badge variant="secondary">{service.status}</Badge>
@@ -87,7 +89,7 @@ export async function AdminServices() {
                <TableCell>
                   <div className="flex items-center gap-2">
                     <DecorationEditDialog decoration={service} />
-                    
+
                     <DeleteDecoration id={service.id} />
                   </div>
                </TableCell>
@@ -99,7 +101,3 @@ export async function AdminServices() {
     </div>
   )
 }
-
-
-
-

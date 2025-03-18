@@ -4,7 +4,7 @@ import { auth, currentUser } from "@clerk/nextjs/server"
 import { eq } from 'drizzle-orm'
 import { redirect } from "next/navigation"
 import { db } from "./db"
-import { bookings, decorations } from "./db/schema"
+import { bookings, decorations2 as decorations } from "./db/schema"
 import {shuffleList} from "@/utils/helpers"
 import { GalleryItemInterface } from "@/utils/types"
 import { clerkClient } from '@clerk/nextjs/server';
@@ -12,15 +12,16 @@ import { clerkClient } from '@clerk/nextjs/server';
 
 export async function getServices (){
    const data = await getDecorations();
-   return data.filter((decoration) => decoration.type === 'service')
+   const  services = data.filter((decoration) => decoration.type === 'service');
+   return services
 }
 export async function getProducts (){
    const data = await getDecorations();
-   return data.filter((decoration) => decoration.type === 'product')
+   const products =  data.filter((decoration) => decoration.type === 'product')
+   return products;
 }
 
 export async function getBookingItem(slug: string){
-  
    const items = await getDecorations()
    const result = items.find(item => item.slug === slug)
    return result
@@ -29,6 +30,7 @@ export async function getBookingItem(slug: string){
 export async function getDecorations(){
 try {
       const data = await db.select().from(decorations);
+
       return data
 } catch (error) {
    console.error(error)
@@ -36,9 +38,9 @@ try {
 }
 }
 
-export async function getService(name: string){
+export async function getService(name: string, local:'en'|'fr'){
    const services = await getDecorations()
-   return services.find(service => service.name === name)
+   return services.find(service => service.name[local] === name)
 }
 
 export async function getDecorationBySlug(slug: string){
@@ -114,7 +116,6 @@ export async function getGalleryItems(){
     })
    })
  return shuffleList( gallery)
-
 }
 
 export async function getUserList(){
@@ -123,4 +124,3 @@ export async function getUserList(){
    const data = response.data.map(user => {user.id, user.banned, user.fullName, user.imageUrl, user.primaryEmailAddress?.emailAddress, user.primaryPhoneNumber?.phoneNumber})
    return data
 }
-

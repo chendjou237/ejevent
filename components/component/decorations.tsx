@@ -4,6 +4,7 @@
 * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
 */
 
+import { useLocale } from "next-intl";
 import Card from "./card";
 
 /** Add fonts into your Next.js project:
@@ -22,26 +23,29 @@ To read more about using these font, please visit the Next.js documentation:
 
 import {Decoration} from '@/utils/types'
 interface DecorationsProps {
-  decorations: Decoration[]
+
+  decorations: Decoration[],
+title: string,
+description: string
 }
-export function Decorations({decorations}: DecorationsProps) {
-  
+export function   Decorations({decorations, title, description}: DecorationsProps) {
+const local = useLocale()
   return (
     <section className=" p-4 md:p-6 " id="decorations">
             <div className="flex flex-col items-center justify-center space-y-4 text-center mb-16">
       <div className="space-y-2">
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Decorate Your Space</h2>
+        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">{title  }</h2>
         <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-          Browse our curated collection of decorative pieces to transform your home.
+          {description}
         </p>
       </div>
     </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 place-items-center gap-x-4 sm:gap-x-32 gap-y-8">
-      {decorations.map((decoration) => ( 
-        <Card key={decoration.id} name={decoration.name} description={decoration.description} images={decoration.images!} slug={decoration.slug} id={`${decoration.id}`} />
+      {decorations.map((decoration) => (
+        <Card key={decoration.id} name={decoration.name[local]} description={decoration.description[local]} images={decoration.images!} slug={decoration.slug} id={`${decoration.id}`} />
       ))}
-  
+
       </div>
   </section>
   )

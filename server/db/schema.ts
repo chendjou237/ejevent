@@ -6,7 +6,8 @@ import {
    serial,
    text,
    timestamp,
-   varchar
+   varchar,
+   jsonb
 } from "drizzle-orm/pg-core";
 
 export const createTable = pgTableCreator((name) => `ejevent_${name}`);
@@ -26,7 +27,23 @@ export const decorations = createTable("decorations", {
    .array()
    .default(sql`'{}'::text[]`),
    })
-   
+
+export const decorations2 = createTable("decorations_2", {
+   id: serial("id").primaryKey(),
+   name: jsonb("name").notNull().$type<{[key:string]:string}>(),
+   description: jsonb("description", ).notNull().$type<{[key:string]:string}>(),
+   type: varchar("type", {length: 50}).notNull(),
+   price: integer("price").default(0),
+   image: text("image").notNull(),
+   created_at: timestamp("created_at").defaultNow(),
+   updated_at: timestamp("updated_at").defaultNow(),
+   slug: varchar("slug", {length: 255}).notNull(),
+   status: varchar("status", {length: 255}).default('available'),
+   images: varchar('images', {length: 255})
+   .array()
+   .default(sql`'{}'::text[]`),
+   })
+
 
 export const bookings = createTable("bookings", {
     id: serial("id").primaryKey(),
@@ -44,5 +61,3 @@ end_at: timestamp("end_at").defaultNow(),
     created_at: timestamp("created_at").defaultNow(),
     updated_at: timestamp("updated_at").defaultNow(),
 })
-
-

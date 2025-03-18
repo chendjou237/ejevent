@@ -1,0 +1,15 @@
+{
+   "createBooking": {
+      "title": "Book Your Decoration Appointment",
+      "subtitle": "Select a date and time that works best for you.",
+      "date": "Date",
+      "booking": {
+         "title": "Your Booking",
+         "scheduledDates": "Scheduled dates:",
+         "startDate": "Start Date:",
+         "endDate": "End Date:",
+         "service": "Service:"
+      },
+      "addToCart": "Add to cart"
+   }
+}

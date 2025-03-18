@@ -20,8 +20,14 @@ To read more about using these font, please visit the Next.js documentation:
 **/
 import Link from "next/link"
 import Image from "next/image"
+   type Props = {
+   title: string
+   description: string
 
-export function Hero() {
+      button: string
+   }
+
+export function Hero({title, description, button}:Props) {
   return (
     <section className="relative w-full h-[80vh] min-h-[500px] bg-gray-950 overflow-hidden">
       <div className="absolute inset-0 w-full h-full">
@@ -30,11 +36,10 @@ export function Hero() {
       <div className="relative z-10 container px-4 md:px-6 h-full flex flex-col items-center justify-center text-center space-y-6 sm:space-y-8">
         <div className="max-w-3xl space-y-4 sm:space-y-6">
           <h1 className="text-3xl font-bold tracking-tighter text-gray-50 sm:text-5xl md:text-6xl">
-            Transform Your Space with Elegant Decorations
+         { title}
           </h1>
           <p className="text-lg text-gray-300 sm:text-xl md:text-2xl">
-            Elevate your event with our expert decoration services. From custom floral arrangements to stunning
-            lighting, we'll bring your vision to life.
+            {description}
           </p>
         </div>
         <Link
@@ -42,7 +47,7 @@ export function Hero() {
           className="inline-flex h-12 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary-950 disabled:pointer-events-none disabled:opacity-50"
           prefetch={false}
         >
-          Book a Consultation
+         {button}
         </Link>
       </div>
     </section>

@@ -17,17 +17,66 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { Switch } from "@/components/ui/switch"
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
-import { Slider } from "@/components/ui/slider"
+'use client'
 import { Button } from "@/components/ui/button"
-import { JSX, SVGProps } from "react"
-
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Slider } from "@/components/ui/slider"
+import { Switch } from "@/components/ui/switch"
+import { JSX, SVGProps, useEffect, useState } from "react"
+import { toast } from "sonner"
+import {contact} from "@/lib/config.json"
 
 export function Settings() {
+  const [contactInfo, setContactInfo] = useState({
+    address: "",
+    phone: "",
+    email: "",
+    businessHours: {
+      open: "",
+      closed: ""
+    }
+  });
+
+  useEffect(() => {
+    // Load contact information from config.json
+    fetch('/api/config')
+      .then(res => res.json())
+      .then(data => {
+        if (data.contact) {
+          setContactInfo(data.contact);
+        }
+      })
+      .catch(error => {
+        console.error('Error loading contact information:', error);
+        toast.error('Failed to load contact information');
+      });
+  }, []);
+
+  const handleContactUpdate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/config', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ contact: contactInfo }),
+      });
+
+      if (response.ok) {
+        toast.success('Contact information updated successfully');
+      } else {
+        throw new Error('Failed to update contact information');
+      }
+    } catch (error) {
+      console.error('Error updating contact information:', error);
+      toast.error('Failed to update contact information');
+    }
+  };
+
   return (
     <div className="flex flex-col w-full min-h-screen bg-muted/40">
       <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-8 p-4 md:gap-12 md:p-10">
@@ -35,7 +84,7 @@ export function Settings() {
           <h1 className="font-semibold text-3xl">Settings</h1>
         </div>
         <div className="grid gap-6 max-w-6xl w-full mx-auto">
-          <Collapsible>
+          {/* <Collapsible>
             <CollapsibleTrigger className="flex items-center justify-between rounded-md bg-card p-4 text-card-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
               <div className="flex items-center gap-4">
                 <UserIcon className="h-6 w-6" />
@@ -62,7 +111,7 @@ export function Settings() {
                 <div className="text-sm text-muted-foreground">Change your password to secure your account.</div>
               </div>
             </CollapsibleContent>
-          </Collapsible>
+          </Collapsible> */}
           <Collapsible>
             <CollapsibleTrigger className="flex items-center justify-between rounded-md bg-card p-4 text-card-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
               <div className="flex items-center gap-4">
@@ -141,6 +190,72 @@ export function Settings() {
                 </Button>
                 <div className="text-sm text-muted-foreground">Review your recent login activity.</div>
               </div>
+            </CollapsibleContent>
+          </Collapsible>
+          <Collapsible>
+            <CollapsibleTrigger className="flex items-center justify-between rounded-md bg-card p-4 text-card-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              <div className="flex items-center gap-4">
+                <ContactIcon className="h-6 w-6" />
+                <h3 className="text-lg font-semibold">Contact Information</h3>
+              </div>
+              <ChevronRightIcon className="h-5 w-5 transition-all [data-state=open]:rotate-90" />
+            </CollapsibleTrigger>
+            <CollapsibleContent className="grid gap-4 p-4">
+              <form onSubmit={handleContactUpdate} className="space-y-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="address">Address</Label>
+                  <Input
+                    id="address"
+                    value={contactInfo.address}
+                    onChange={(e) => setContactInfo({...contactInfo, address: e.target.value})}
+                    placeholder={contact.address}
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="phone">Phone Number</Label>
+                  <Input
+                    id="phone"
+                    value={contactInfo.phone}
+                    onChange={(e) => setContactInfo({...contactInfo, phone: e.target.value})}
+                    placeholder={contact.phone}
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={contactInfo.email}
+                    onChange={(e) => setContactInfo({...contactInfo, email: e.target.value})}
+                    placeholder={contact.address}
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="businessHoursOpen">Business Hours (Open)</Label>
+                  <Input
+                    id="businessHoursOpen"
+                    value={contactInfo.businessHours.open}
+                    onChange={(e) => setContactInfo({
+                      ...contactInfo,
+                      businessHours: {...contactInfo.businessHours, open: e.target.value}
+                    })}
+                    placeholder={contact.businessHours.open}
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="businessHoursClosed">Business Hours (Closed)</Label>
+                  <Input
+                    id="businessHoursClosed"
+                    value={contactInfo.businessHours.closed}
+                    onChange={(e) => setContactInfo({
+                      ...contactInfo,
+                      businessHours: {...contactInfo.businessHours, closed: e.target.value}
+                    })}
+                    placeholder={contact.businessHours.closed}
+                  />
+                </div>
+                <Button type="submit">Save Contact Information</Button>
+              </form>
             </CollapsibleContent>
           </Collapsible>
         </div>
@@ -251,6 +366,25 @@ function UserIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
     >
       <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
       <circle cx="12" cy="7" r="4" />
+    </svg>
+  )
+}
+
+function ContactIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
     </svg>
   )
 }

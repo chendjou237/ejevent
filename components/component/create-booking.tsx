@@ -24,13 +24,25 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Label } from "@/components/ui/label"
 import { useBookingDate } from '@/contexts/BookingDateContext'
 import { useCartBookings } from "@/contexts/CartBookingsContext"
-import { getDecorationBySlug } from "@/server/queries"
-import { Decoration } from "@/utils/types"
 import { formatDate } from 'date-fns'
 import Image from 'next/image'
 import { useParams, useRouter } from 'next/navigation'
 import { JSX, SVGProps } from "react"
 import { toast } from "sonner"
+
+interface CreateBookingTranslations {
+  title: string;
+  subtitle: string;
+  date: string;
+  booking: {
+    title: string;
+    scheduledDates: string;
+    startDate: string;
+    endDate: string;
+    service: string;
+  };
+  addToCart: string;
+}
 
 interface CreateBookingProps {
   item: {
@@ -45,20 +57,22 @@ interface CreateBookingProps {
     slug: string;
     status: string | null;
     images: string[] | null;
-} 
+  };
+  translations: CreateBookingTranslations;
 }
-export  function CreateBooking({item}: CreateBookingProps) {
-  const {startTime, endTime} = useBookingDate()
+
+export function CreateBooking({ item, translations }: CreateBookingProps) {
+  const { startTime, endTime } = useBookingDate()
   const params = useParams()
-  const {cart: cartItems, setCart: setCartItems} = useCartBookings() 
-  
+  const { cart: cartItems, setCart: setCartItems } = useCartBookings()
+ 
   const router = useRouter()
-  const handleAddToCart = ()=> {
+  const handleAddToCart = () => {
     try {
-      setCartItems([...cartItems, { ...item, start_at:startTime, end_at:endTime, quantity: 1, price: item.price!, image: item.images![0], type: item.type}])
+      setCartItems([...cartItems, { ...item, start_at: startTime, end_at: endTime, quantity: 1, price: item.price!, image: item.images![0], type: item.type }])
       toast.success('Decoration added to cart')
       router.push('/cart')
-      
+
     } catch (error) {
       console.error(error)
       toast.error('An error occurred while adding item to cart')
@@ -68,74 +82,58 @@ export  function CreateBooking({item}: CreateBookingProps) {
   return (
     <div className="grid gap-8 p-6 sm:p-8 md:p-10 lg:p-12">
       <div className="grid gap-4">
-        <h2 className="text-2xl font-bold tracking-tight">Book Your Decoration Appointment</h2>
-        <p className="text-muted-foreground">Select a date and time that works best for you.</p>
+        <h2 className="text-2xl font-bold tracking-tight">{translations.title}</h2>
+        <p className="text-muted-foreground">{translations.subtitle}</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2  gap-8">
         <div className="grid gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="date">Date</Label>
-       {/*      <Popover>
-              <PopoverTrigger asChild>
-                <Button variant="outline" className="w-full justify-start text-left font-normal">
-                  <CalendarDaysIcon className="mr-2 h-4 w-4 -translate-x-1" />
-                  <span id="date-display">Select a date</span>
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start"> */}
-                <Calendar
-                  mode="single"
-                  className="p-0 [&_td]:w-10 [&_td]:h-10 [&_th]:w-10 [&_[name=day]]:w-10 [&_[name=day]]:h-10 [&>div]:space-x-0 [&>div]:gap-6"
-                  onSelect={(date: any): void => {
-                    const dateDisplay = new Date(date).toLocaleDateString()
-                    document.getElementById("date-display")!.textContent = dateDisplay
-                  }}
-                />
-          {/*     </PopoverContent>
-            </Popover> */}
+            <Label htmlFor="date">{translations.date}</Label>
+            <Calendar
+              mode="single"
+              className="p-0 [&_td]:w-10 [&_td]:h-10 [&_th]:w-10 [&_[name=day]]:w-10 [&_[name=day]]:h-10 [&>div]:space-x-0 [&>div]:gap-6"
+              onSelect={(date: any): void => {
+                const dateDisplay = new Date(date).toLocaleDateString()
+                document.getElementById("date-display")!.textContent = dateDisplay
+              }}
+            />
           </div>
-        
         </div>
         <div className="grid gap-4">
           <Card className="opacity-85">
             <CardHeader>
-              <CardTitle>Your Booking</CardTitle>
+              <CardTitle>{translations.booking.title}</CardTitle>
             </CardHeader>
             <CardContent className="grid gap-4">
               <div className="flex justify-between space-x-8 flex-row">
-
-              <div className="flex flex-col space-y-4">
-              <div className="flex items-center justify-between">
-                <span>Scheduled dates:</span>
-                <span id="date-display"> {formatDate(  Date.now(), 'MM/dd/yyyy')} </span>
+                <div className="flex flex-col space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span>{translations.booking.scheduledDates}</span>
+                    <span id="date-display"> {formatDate(Date.now(), 'MM/dd/yyyy')} </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>{translations.booking.startDate}</span>
+                    <span id="time-display">{formatDate(startTime ?? new Date(Date.now()), 'MM/dd/yyyy')} </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>{translations.booking.endDate}</span>
+                    <span id="time-display">{formatDate(endTime ?? new Date(Date.now()), 'MM/dd/yyyy')}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>{translations.booking.service}</span>
+                    <span id="service-display"> {" " + item?.name}</span>
+                  </div>
+                </div>
+                <div className="">
+                  <Image src={item?.image ?? './placeholder.jpg'} alt={item?.name ?? 'default'} width={200} height={200} />
+                </div>
               </div>
-              <div className="flex items-center justify-between">
-                <span>Start Date:</span>
-                <span id="time-display">{formatDate(  startTime ?? new Date( Date.now()), 'MM/dd/yyyy')} </span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>End Date:</span>
-                <span id="time-display">{formatDate(endTime ?? new Date( Date.now()), 'MM/dd/yyyy')}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>Service: </span>
-                <span id="service-display"> {" "+item?.name}</span>
-              </div>
-              
-              </div>
-
-              <div className="">
-                <Image src={item?.image?? './placeholder.jpg'} alt={item?.name ?? 'default'} width={200} height={200} />
-              </div>
-
-              </div>
-              <Button  className="w-full" onClick={handleAddToCart}>
-                  Add to cart
-                </Button>
+              <Button className="w-full" onClick={handleAddToCart}>
+                {translations.addToCart}
+              </Button>
             </CardContent>
             <CardFooter className="flex justify-center items-center h-full">
             </CardFooter>
-            
           </Card>
         </div>
       </div>

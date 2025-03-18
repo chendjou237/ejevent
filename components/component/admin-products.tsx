@@ -24,14 +24,15 @@ import { Badge } from "@/components/ui/badge"
 import { JSX, SVGProps } from "react"
 import { DecorationCreationDialog, DecorationEditDialog } from "./decoration-dialog"
 import { DeleteDecoration } from "./delete-modal"
+import { useLocale } from "next-intl"
 interface Props {
   data: {
-    name: string;
-    status: string | null;
+    name: {[key:string]:string} | null;
+    status: string| null;
     image: string;
     id: number;
     type: string;
-    description: string;
+    description: {[key:string]:string} | null;
     images: string[] | null;
     slug: string;
     // price: number | null;
@@ -40,7 +41,8 @@ interface Props {
 }[]
 }
 export function AdminProducts({data}: Props) {
-  
+   const locale = useLocale();
+
   return (
     <div className="p-4 sm:p-6 md:p-8 lg:p-10">
       <div className="flex items-center justify-between mb-6">
@@ -61,12 +63,12 @@ export function AdminProducts({data}: Props) {
           </TableHeader>
           <TableBody>
          {
-         data.map(product => (   <TableRow>
+         data.map(product => (   <TableRow key={product.id}>
           <TableCell>
             <img src={product.images![0]!} alt="Decoration 1" width={80} height={80} className="rounded-md" />
           </TableCell>
-          <TableCell>{product.name}</TableCell>
-          <TableCell>{product.description}</TableCell>
+          <TableCell>{product.name![locale]}</TableCell>
+          <TableCell>{product.description![locale]}</TableCell>
           {/* <TableCell>$250</TableCell> */}
           <TableCell>
             <Badge variant="secondary">Available</Badge>

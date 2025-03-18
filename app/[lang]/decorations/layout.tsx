@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { BookingDateProvider } from './../../contexts/BookingDateContext';
+import { BookingDateProvider } from '../../../contexts/BookingDateContext';
 
 interface LayoutProps {
    children: ReactNode;

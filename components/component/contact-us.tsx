@@ -18,14 +18,50 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
-import { JSX, SVGProps } from "react"
-import { useState } from "react"
-import {toast} from "sonner"
-export function ContactUs() {
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { JSX, SVGProps, useState } from "react"
+import { toast } from "sonner"
+import {contact} from "@/lib/config.json"
+type Props = {
+   title: string
+   description: string
+   nameLabel: string
+   namePlaceholder: string
+   emailLabel: string
+   emailPlaceholder: string
+   phoneLabel: string
+   phonePlaceholder: string
+   messageLabel: string
+   messagePlaceholder: string
+   button: string
+   whatsappButton: string
+   contactInformation: string
+   businessHour: string
+   businessTime: string
+   closedTime: string
+
+}
+export function ContactUs({
+   title,
+   description,
+   nameLabel,
+   namePlaceholder,
+   emailLabel,
+   emailPlaceholder,
+   phoneLabel,
+   phonePlaceholder,
+   messageLabel,
+   messagePlaceholder,
+   button,
+   whatsappButton,
+   businessHour,
+   businessTime,
+   closedTime,
+   contactInformation
+}:Props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -35,14 +71,11 @@ export function ContactUs() {
   const messageWhatsapp = "Hello! I'm reaching out to you. from the website ejevent.co"; // Replace with your predefined message
 
   const openWhatsApp = () => {
-
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(messageWhatsapp)}`;
     window.open(url, '_blank');
   };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-   
-   
     try {
       setLoading(true)
       const response = await fetch('/api/send', {
@@ -72,10 +105,9 @@ export function ContactUs() {
       <div className="container grid gap-12 px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Get in Touch</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">{title}</h2>
             <p className="max-w-[700px] text-gray-500 md:text-xl/relaxed dark:text-gray-400">
-              Have a question or want to book a consultation? Fill out the form below and we&apos;ll get back to you as soon
-              as possible.
+            {description}
             </p>
           </div>
         </div>
@@ -84,63 +116,63 @@ export function ContactUs() {
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Name</Label>
-                  <Input id="name" placeholder="Enter your name"  value={name} onChange={(e) => setName(e.target.value)} />
+                  <Label htmlFor="name">{nameLabel}</Label>
+                  <Input id="name" placeholder={namePlaceholder}  value={name} onChange={(e) => setName(e.target.value)} />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">{emailLabel}</Label>
                   <Input id="email" type="email" value={email}
-        onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" />
+        onChange={(e) => setEmail(e.target.value)} placeholder={emailPlaceholder} />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="phone">Phone</Label>
-                <Input id="phone" placeholder="Enter your phone number" value={phone}
+                <Label htmlFor="phone">{phoneLabel}</Label>
+                <Input id="phone" placeholder={phonePlaceholder} value={phone}
         onChange={(e) => setPhone(e.target.value)} />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="message">Message</Label>
-                <Textarea id="message" placeholder="Enter your message" value={message}
+                <Label htmlFor="message">{messageLabel}</Label>
+                <Textarea id="message" placeholder={messagePlaceholder} value={message}
         onChange={(e) => setMessage(e.target.value)} className="min-h-[100px]" />
               </div>
               <div className="flex flex-col gap-4 md:flex-row">
                 <Button type="submit" className="w-full md:w-auto" disabled={isLoading}>
-                  Submit
+                  {button}
                 </Button>
                 <Button
                  onClick={openWhatsApp}
                  className="inline-flex h-10 w-full items-center justify-center rounded-md bg-green-500 px-6 text-sm font-medium text-white shadow transition-colors hover:bg-green-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-green-600 disabled:pointer-events-none disabled:opacity-50 md:w-auto"
                  >
                   <PhoneIcon className="mr-2 h-5 w-5" />
-                  Contact us on WhatsApp
+                  {whatsappButton} WhatsApp
                 </Button>
                   </div>
             </form>
           </div>
           <div className="space-y-6">
             <div className="space-y-2">
-              <h3 className="text-2xl font-bold">Contact Information</h3>
+              <h3 className="text-2xl font-bold">{contactInformation}</h3>
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
                   <LocateIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                  <p className="text-gray-500 dark:text-gray-400">Canada 🇨🇦 Toronto Ontario
+                  <p className="text-gray-500 dark:text-gray-400">{contact.address}
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
                   <PhoneIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                  <p className="text-gray-500 dark:text-gray-400">+1 (647) 674-9434</p>
+                  <p className="text-gray-500 dark:text-gray-400">{contact.phone}</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <MailIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-                  <p className="text-gray-500 dark:text-gray-400">maivalaetitia@gmail.com</p>
+                  <p className="text-gray-500 dark:text-gray-400">{contact.email}</p>
                 </div>
               </div>
             </div>
             <div className="space-y-2">
-              <h3 className="text-2xl font-bold">Business Hours</h3>
+              <h3 className="text-2xl font-bold">{businessHour}</h3>
               <div className="space-y-1">
-                <p className="text-gray-500 dark:text-gray-400">Monday - Friday: 9am - 5pm</p>
-                <p className="text-gray-500 dark:text-gray-400">Saturday - Sunday: Closed</p>
+                <p className="text-gray-500 dark:text-gray-400">{businessTime}</p>
+                <p className="text-gray-500 dark:text-gray-400">{closedTime}</p>
               </div>
             </div>
           </div>

@@ -1,18 +1,17 @@
 'use server'
 
 
+import { EmailBookingTemplate } from "@/components/component/email-template"
+import { storage } from "@/lib/firebase"
 import { db } from "@/server/db"
 import { bookings, decorations } from "@/server/db/schema"
-import {Booking, Decoration} from "@/utils/types"
+import { Booking, Decoration } from "@/utils/types"
 import { randomInt } from "crypto"
+import { eq } from "drizzle-orm"
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
+import { nanoid } from "nanoid"
 import { revalidatePath } from 'next/cache'
-import { Resend } from 'resend';
-import { formatDate } from 'date-fns'
-import { EmailBookingTemplate } from "@/components/component/email-template"
-import {eq} from "drizzle-orm"
-import { storage } from "@/lib/firebase";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { nanoid } from "nanoid";
+import { Resend } from 'resend'
 
 
 export async function  createBookings  (body: Booking[])  {
@@ -33,7 +32,7 @@ export async function  createBookings  (body: Booking[])  {
           end_at: endTime,
           status: 'pending'
        } */
-    
+
         await db.insert(bookings).values(createBookings)
         const resend = new Resend(process.env.RESEND_API_KEY);
         const startDate = `${body[0].start_at?.toLocaleDateString()}`
@@ -77,7 +76,7 @@ export async function  createBookings  (body: Booking[])  {
          message: "Please try again later",
          error
       }
-      
+
    }
   }
 
@@ -100,7 +99,7 @@ export async function  createBookings  (body: Booking[])  {
    }
   }
 
-  export async function CreateDecoration(name: string, description: string, images: string[], type: string){
+  export async function CreateDecoration(name: {[key:string]:string}, description: {[key:string]:string}, images: string[], type: string){
       const data: Decoration= {
          id: randomInt(10000),
          name,
@@ -109,7 +108,7 @@ export async function  createBookings  (body: Booking[])  {
          images,
          price: 0,
          image: images[0],
-         slug: name.replace(/\s+/g, '-').toLowerCase(),
+         slug: name['en'].replace(/\s+/g, '-').toLowerCase(),
          status: 'available'
       }
 
@@ -140,7 +139,7 @@ export async function  createBookings  (body: Booking[])  {
           `${folder}${filename}.${file.name.split(".").pop()}`
         );
         const res = await uploadBytes(storageRef, file);
-    
+
         return res.metadata.fullPath;
       } catch (error) {
         throw error;

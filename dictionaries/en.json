@@ -1,0 +1,133 @@
+{
+   "nav": {
+      "home": "Home",
+      "gallery": "Gallery",
+      "bookings": "Bookings",
+      "dashboard": "Dashboard"
+   },
+   "hero": {
+      "title": "Transform Your Space with Elegant Decorations",
+      "description": "Elevate your event with our expert decoration services. From custom floral arrangements to stunning lighting, we'll bring your vision to life.",
+      "button": "Book a consultation"
+   },
+   "about-us": {
+      "point-1-title": "Our Mission",
+      "point-1-description": "EJ Event, where we believe that every celebration should be a masterpiece of beauty, elegance, and personalization. Our passion for design, attention to detail, and dedication to creating unforgettable experiences set us apart from the rest. At EJ Event, we don't just plan events – we curate enchanting moments that reflect your unique style and vision. From exquisite decorations to seamless coordination, we infuse every detail with creativity and care to transform your event into a magical and unforgettable experience. Trust EJ Event to bring your dreams to life and make your special occasion truly extraordinary.",
+      "point-2-title": "Our Values",
+      "point-2-description": "Excellence • Creativity • Personalization • Attention to Detail • Innovation • Reliability • Customer Satisfaction • Elegance • Passion • Dedication",
+      "point-3-title": "Meet Our Designers",
+      "point-3-description": "At EJ Event, our team of talented designers is dedicated to turning your event dreams into reality. With a keen eye for detail and a passion for creativity, our designers will work tirelessly to bring your vision to life. From elegant table settings to enchanting floral arrangements, our designers will craft every element with precision and care. Trust in our expertise to elevate your event to the next level. Let us create a masterpiece that will leave a lasting impression on you and your guests",
+      "button": "Submit"
+   },
+   "gallery": {
+      "title": "Explore Our Decor Collection",
+      "description": "Transform your special occasions into unforgettable experiences with our exquisite decorations and event planning services. From stunning centerpieces to breathtaking backdrops, we'll bring your vision to life with style and elegance. Let us help you create magical moments that will leave a lasting impression on your guests. Explore our collection and let's make your next event truly extraordinary"
+   },
+   "decorations": {
+      "title": "Decorate Your Space",
+      "description": "Browse our curated collection of decorative pieces to transform your home."
+   },
+   "services": {
+      "title": "Event Decoration Services",
+      "description": "Transform your celebrations with our bespoke decoration services, tailored to make your special day unforgettable."
+   },
+   "contact-us": {
+      "title": "Get in Touch",
+      "description": "Have a question or want to book a consultation? Fill out the form below and we'll get back to you as soon as possible.",
+      "name-label": "Name",
+      "name-placeholder": "Enter Your Name",
+      "email-label": "Email",
+      "email-placeholder": "Enter Your Email",
+      "phone-label": "Phone",
+      "phone-placeholder": "Enter Your Phone number",
+      "message-label": "Message",
+      "message-placeholder": "Enter a descriptive message",
+      "button": "Contact Us",
+      "whatsapp-button": "Contactez Nous Sur ",
+      "contact-information-title": "Contact Information",
+      "business-hour": "Business Hour",
+      "business-time": "Monday - Friday: 9am - 5pm",
+      "closed-time": "Saturday - Sunday: Closed"
+   },
+   "common": {
+      "loading": "Loading...",
+      "error": "Something went wrong",
+      "success": "Success",
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "save": "Save",
+      "delete": "Delete",
+      "edit": "Edit",
+      "view": "View"
+   },
+   "auth": {
+      "signIn": "Sign In",
+      "signUp": "Sign Up",
+      "signOut": "Sign Out"
+   },
+   "bookings": {
+      "title": "Book Your Event",
+      "selectDate": "Select Date",
+      "selectTime": "Select Time",
+      "eventType": "Event Type",
+      "guestCount": "Number of Guests",
+      "specialRequests": "Special Requests",
+      "submit": "Book Now",
+      "success": "Booking Confirmed",
+      "error": "Booking Failed"
+   },
+   "language": {
+      "select": "Select Language",
+      "en": "English",
+      "fr": "French"
+   },
+   "LocaleSwitcher": {
+      "switchLocale": "Switch to {locale, select, fr {French} en {English} other {Unknown}}"
+   },
+   "createBooking": {
+      "title": "Book Your Decoration Appointment",
+      "subtitle": "Select a date and time that works best for you.",
+      "date": "Date",
+      "booking": {
+         "title": "Your Booking",
+         "scheduledDates": "Scheduled dates:",
+         "startDate": "Start Date:",
+         "endDate": "End Date:",
+         "service": "Service:"
+      },
+      "addToCart": "Add to cart"
+   },
+   "cart": {
+      "title": "Your Cart",
+      "orderSummary": {
+         "title": "Order Summary",
+         "decorations": "Decorations",
+         "services": "Services",
+         "total": "Total",
+         "addReservations": "Add Reservations",
+         "startDate": "Start Date",
+         "endDate": "End Date"
+      },
+      "personalInfo": {
+         "title": "Personal Information",
+         "name": {
+            "label": "Name",
+            "placeholder": "Enter your name"
+         },
+         "email": {
+            "label": "Email",
+            "placeholder": "Enter your email"
+         },
+         "phone": {
+            "label": "Phone",
+            "placeholder": "Enter your phone number"
+         },
+         "confirmButton": "Confirm Reservation"
+      },
+      "toasts": {
+         "creatingBooking": "Creating Booking",
+         "bookingSuccess": "Booking Successful, an email was sent to you",
+         "bookingError": "An error occurred while creating your booking"
+      }
+   }
+}

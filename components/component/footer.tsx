@@ -77,13 +77,13 @@ export function Footer() {
               >
                 <FacebookIcon className="w-6 h-6" />
               </Link>
-              <Link
+              {/* <Link
                 href="https://www.instagram.com/ej_events_and_co?igsh=MWZxYzYxc2o2ejBieQ%3D%3D&utm_source=qr"
                 className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
                 prefetch={false}
               >
                 <TwitterIcon className="w-6 h-6" />
-              </Link>
+              </Link> */}
               <Link
                 href="https://www.instagram.com/ej_events_and_co?igsh=MWZxYzYxc2o2ejBieQ%3D%3D&utm_source=qr"
                 className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"

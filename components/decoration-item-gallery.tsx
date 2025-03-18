@@ -32,7 +32,7 @@ export function DecorationItemGallery({title, description, images}: Props) {
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Explore Our {title}</h2>
           <p className="mt-2 text-lg text-muted-foreground">
-            {description}
+         {description}
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
@@ -48,9 +48,9 @@ export function DecorationItemGallery({title, description, images}: Props) {
               <ZoomInIcon className="w-8 h-8 text-white" />
             </div>
           </Link>))}
-          
-          
-         
+
+
+
         </div>
         {images.length >9 ? <div className="flex justify-center">
           <Button variant="outline" className="w-full sm:w-auto">
